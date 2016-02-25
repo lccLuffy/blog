@@ -11,7 +11,7 @@
         <div>
             <ul class="list-group list-group-item-heading">
                 <li><i class="fa fa-clock-o"></i>{{ $post->updated_at->diffForHumans() }}</li>
-                <li><i class="fa fa-user"></i>{{ $post->user->username }}</li>
+                <li><i class="fa fa-user"></i><a href="{{ route('user.index',$post->user_id) }}">{{ $post->user->username }}</a> </li>
             </ul>
             @can('post.update',$post)
             <form role="form" method="post" action="{{ route('post.destroy',$post->id) }}">

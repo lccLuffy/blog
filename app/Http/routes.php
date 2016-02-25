@@ -29,6 +29,7 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('/welcome', 'HomeController@welcome');
     Route::resource('/post','PostController');
 
+    Route::get('user/{user}',['uses'=>'HomeController@showUser','as'=>'user.index']);
 });
 
 Route::group(['middleware' => 'web'], function () {

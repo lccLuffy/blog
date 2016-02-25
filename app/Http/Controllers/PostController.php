@@ -87,7 +87,8 @@ class PostController extends Controller
     public function update(PostRequest $request, Post $post)
     {
         $post->syncTags($request->get('tags', []));
-        if ($post->update($request->except('_token', '_method'))) {
+        if ($post->update($request->except('_token', '_method')))
+        {
             return back()->with('success', '修改成功');
         }
         return back()->withErrors('修改失败');
@@ -102,6 +103,7 @@ class PostController extends Controller
     public function destroy(Post $post)
     {
         if ($post->delete()) {
+            $post->tags()->detach();
             return back()->with('success', '删除成功');
         }
         return back()->with('success', '删除失败');

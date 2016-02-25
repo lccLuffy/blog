@@ -68,6 +68,7 @@
 
                         <ul class="dropdown-menu" role="menu">
                             <li><a href="{{ url('/logout') }}"><i class="fa fa-btn fa-sign-out"></i>退出登录</a></li>
+                            <li><a href="{{ route('user.index',Auth::id()) }}"><i class="fa fa-user"></i>个人主页</a></li>
                         </ul>
                     </li>
                 @else
