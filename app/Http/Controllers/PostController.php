@@ -5,8 +5,6 @@ namespace App\Http\Controllers;
 use App\Http\Requests;
 use App\Http\Requests\PostRequest;
 use App\Post;
-use App\Tag;
-use Illuminate\Http\Request;
 use EndaEditor;
 
 class PostController extends Controller
@@ -44,13 +42,12 @@ class PostController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request $request
+     * @param PostRequest|\Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(PostRequest $request)
     {
-
-        $post = Post::create($request->postData());
+        $post = Post::create($request->creatingData());
 
         $post->syncTags($request->get('tags', []));
 
@@ -60,7 +57,7 @@ class PostController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int $id
+     * @param Post $post
      * @return \Illuminate\Http\Response
      */
     public function show(Post $post)
@@ -69,10 +66,8 @@ class PostController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int $id
-     * @return \Illuminate\Http\Response
+     * @param Post $post
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function edit(Post $post)
     {
@@ -82,14 +77,16 @@ class PostController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request $request
-     * @param  int $id
+     * @param PostRequest $request
+     * @param Post $post
      * @return \Illuminate\Http\Response
+     * @internal param $PostRequest
+     * @internal param int $id
      */
     public function update(PostRequest $request, Post $post)
     {
         $post->syncTags($request->get('tags', []));
-        if ($post->update($request->except('_token', '_method')))
+        if ($post->update($request->updatingData()))
         {
             return back()->with('success', '修改成功');
         }
@@ -99,8 +96,10 @@ class PostController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int $id
+     * @param Post $post
      * @return \Illuminate\Http\Response
+     * @throws \Exception
+     * @internal param int $id
      */
     public function destroy(Post $post)
     {

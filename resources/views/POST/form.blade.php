@@ -10,7 +10,7 @@
 <div class="form-group">
     <div class="input-group col-md-12">
         <div class="editor">
-            <textarea id='myEditor' class="form-control" name="content" placeholder="内容">{{ $post->content or old('content') }}</textarea>
+            <textarea id='myEditor' class="form-control" name="content_raw" placeholder="内容">{{ $post->content_raw or old('content_raw') }}</textarea>
 
         </div>
     </div>

@@ -2,9 +2,8 @@
 
 namespace App\Http\Requests;
 
-use App\Http\Requests\Request;
-use Illuminate\Support\Facades\Auth;
 use EndaEditor;
+use Illuminate\Support\Facades\Auth;
 
 class PostRequest extends Request
 {
@@ -27,16 +26,25 @@ class PostRequest extends Request
     {
         return [
             'title'=>'required|max:255',
-            'content'=>'required'
+            'content_raw'=>'required'
         ];
     }
 
-    public function postData()
+    public function creatingData()
     {
         return [
             'title'=>$this['title'],
-            'content'=>EndaEditor::MarkDecode($this['content']),
+            'content_html'=>EndaEditor::MarkDecode($this['content_raw']),
+            'content_raw'=>$this['content_raw'],
             'user_id'=>Auth::id(),
+        ];
+    }
+    public function updatingData()
+    {
+        return [
+            'title'=>$this['title'],
+            'content_html'=>EndaEditor::MarkDecode($this['content_raw']),
+            'content_raw'=>$this['content_raw'],
         ];
     }
 }

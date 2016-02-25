@@ -11,7 +11,7 @@
                     {{ $post->title }}
                 </div>
                 <div class="panel-body">
-                    {!! $post->content !!}
+                    {!! $post->content_html !!}
                 </div>
                 <div class="panel-footer">
                     <div class="social-share"></div>

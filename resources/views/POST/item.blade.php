@@ -3,7 +3,7 @@
         <a href="{{ route('post.show',$post->id) }}">
             <p class="lead">{{ $post->title }}</p>
         </a>
-        <p>{!! $post->content !!}</p>
+        <p>{!! $post->content_html !!}</p>
         @foreach($post->tags()->lists('name') as $tag)
             <span><i class="fa fa-tag"></i>{{ $tag }}</span>
         @endforeach
