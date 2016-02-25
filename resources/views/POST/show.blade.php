@@ -1,5 +1,8 @@
 @extends('layouts.app')
 @section('title',$post->title)
+@section('css')
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.10/css/share.min.css" rel="stylesheet">
+@endsection
 @section('content')
     <div class="row">
         <main class="col-md-9">
@@ -9,6 +12,9 @@
                 </div>
                 <div class="panel-body">
                     {!! $post->content !!}
+                </div>
+                <div class="panel-footer">
+                    <div class="social-share"></div>
                 </div>
             </div>
         </main>
@@ -24,4 +30,7 @@
             @include('sidebar.search')
         </aside>
     </div>
+@endsection
+@section('scripts')
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.10/js/share.min.js"></script>
 @endsection

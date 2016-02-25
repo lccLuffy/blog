@@ -4,6 +4,12 @@
         <p class="lead">{{ $user->username }}</p>
     </div>
     <div class="row">
-        @each('post.item',$user->posts,'post')
+        <div class="col-md-8">
+            @each('post.item',$posts,'post')
+        </div>
+        <div class="col-md-8">
+            {!! $posts->links()  !!}
+        </div>
     </div>
+
 @endsection

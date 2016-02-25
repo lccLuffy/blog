@@ -44,6 +44,7 @@ class HomeController extends Controller
      */
     public function showUser(User $user)
     {
-        return view('user.index',compact('user'));
+        $posts = $user->posts()->orderBy('updated_at','desc')->paginate(6);
+        return view('user.index',compact('user','posts'));
     }
 }
