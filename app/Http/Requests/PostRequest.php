@@ -4,6 +4,7 @@ namespace App\Http\Requests;
 
 use App\Http\Requests\Request;
 use Illuminate\Support\Facades\Auth;
+use EndaEditor;
 
 class PostRequest extends Request
 {
@@ -34,7 +35,7 @@ class PostRequest extends Request
     {
         return [
             'title'=>$this['title'],
-            'content'=>$this['content'],
+            'content'=>EndaEditor::MarkDecode($this['content']),
             'user_id'=>Auth::id(),
         ];
     }

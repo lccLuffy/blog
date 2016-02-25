@@ -155,7 +155,7 @@ return [
         App\Providers\AuthServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
-        YuanChao\Editor\EndaEditorServiceProvider::class
+        YuanChao\Editor\EndaEditorServiceProvider::class,
     ],
 
     /*
@@ -201,7 +201,7 @@ return [
         'URL'       => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View'      => Illuminate\Support\Facades\View::class,
-        'EndaEditor' => 'YuanChao\Editor\Facade\EndaEditorFacade'
+        'EndaEditor'=> YuanChao\Editor\Facade\EndaEditorFacade::class,
     ],
 
 ];

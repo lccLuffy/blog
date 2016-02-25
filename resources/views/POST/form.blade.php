@@ -9,15 +9,10 @@
 
 <div class="form-group">
     <div class="input-group col-md-12">
-
-        @include('vendor.editor.head')
-
         <div class="editor">
-            <textarea id='myEditor'></textarea>
+            <textarea id='myEditor' class="form-control" name="content" placeholder="内容">{{ $post->content or old('content') }}</textarea>
 
         </div>
-        {{--<textarea class="form-control" name="content" placeholder="内容"
-                  rows="25">{{ $post->content or old('content') }}</textarea>--}}
     </div>
 </div>
 <div class="form-group">
@@ -32,3 +27,6 @@
         </select>
     </div>
 </div>
+@section('scripts')
+    @include('vendor.editor.head')
+@endsection

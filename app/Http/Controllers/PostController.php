@@ -7,6 +7,7 @@ use App\Http\Requests\PostRequest;
 use App\Post;
 use App\Tag;
 use Illuminate\Http\Request;
+use EndaEditor;
 
 class PostController extends Controller
 {
@@ -48,6 +49,7 @@ class PostController extends Controller
      */
     public function store(PostRequest $request)
     {
+
         $post = Post::create($request->postData());
 
         $post->syncTags($request->get('tags', []));
