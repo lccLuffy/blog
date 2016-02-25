@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests;
 use App\Http\Requests\PostRequest;
 use App\Post;
+use App\Tag;
 use Illuminate\Http\Request;
 
 class PostController extends Controller
@@ -48,10 +49,10 @@ class PostController extends Controller
     public function store(PostRequest $request)
     {
         $post = Post::create($request->postData());
-        if ($post)
-            return redirect()->route('post.index')->with('success', '发布成功');
-        else
-            return redirect()->route('post.index')->with('success', '发布失败');
+
+        $post->syncTags($request->get('tags', []));
+
+        return redirect()->route('post.index')->with('success', '发布成功');
     }
 
     /**
@@ -85,6 +86,7 @@ class PostController extends Controller
      */
     public function update(PostRequest $request, Post $post)
     {
+        $post->syncTags($request->get('tags', []));
         if ($post->update($request->except('_token', '_method'))) {
             return back()->with('success', '修改成功');
         }

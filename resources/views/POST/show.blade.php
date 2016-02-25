@@ -21,6 +21,7 @@
                     内容
                 </div>
             </div>
+            @include('sidebar.search')
         </aside>
     </div>
 @endsection

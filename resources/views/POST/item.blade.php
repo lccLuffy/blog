@@ -1,15 +1,18 @@
 <div class="col-md-4">
 
     <article>
-        <p class="page-header">{{ $post->title }}</p>
+        <a href="{{ route('post.show',$post->id) }}">
+            <p class="lead">{{ $post->title }}</p>
+        </a>
         <p>{!! $post->content !!}</p>
+        @foreach($post->tags()->lists('name') as $tag)
+            <span><i class="fa fa-tag"></i>{{ $tag }}</span>
+        @endforeach
         <div>
             <ul class="list-group list-group-item-heading">
                 <li><i class="fa fa-clock-o"></i>{{ $post->updated_at->diffForHumans() }}</li>
+                <li><i class="fa fa-user"></i>{{ $post->user->username }}</li>
             </ul>
-            <a href="{{ route('post.show',$post->id) }}">
-                <button class="btn btn-block">查看</button>
-            </a>
             @can('post.update',$post)
             <form role="form" method="post" action="{{ route('post.destroy',$post->id) }}">
                 {!!  csrf_field() !!}
