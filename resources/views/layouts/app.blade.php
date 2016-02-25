@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <title>
-        Laravel
+        lcc_luffy
         @yield('title')
     </title>
 
@@ -52,8 +52,8 @@
         <div class="collapse navbar-collapse" id="app-navbar-collapse">
             <!-- Left Side Of Navbar -->
             <ul class="nav navbar-nav">
-                <li><a href="{{ route('post.index') }}">post.index</a></li>
-                <li><a href="{{ route('post.create') }}">post.create</a></li>
+                <li><a href="{{ route('post.index') }}">文章</a></li>
+                <li><a href="{{ route('post.create') }}">发布</a></li>
             </ul>
 
             <!-- Right Side Of Navbar -->
@@ -66,12 +66,12 @@
                         </a>
 
                         <ul class="dropdown-menu" role="menu">
-                            <li><a href="{{ url('/logout') }}"><i class="fa fa-btn fa-sign-out"></i>Logout</a></li>
+                            <li><a href="{{ url('/logout') }}"><i class="fa fa-btn fa-sign-out"></i>退出登录</a></li>
                         </ul>
                     </li>
                 @else
-                    <li><a href="{{ url('/login') }}">Login</a></li>
-                    <li><a href="{{ url('/register') }}">Register</a></li>
+                    <li><a href="{{ url('/login') }}">登录</a></li>
+                    <li><a href="{{ url('/register') }}">注册</a></li>
                 @endif
             </ul>
         </div>

@@ -25,7 +25,7 @@ class PostController extends Controller
      */
     public function index()
     {
-        $posts = Post::paginate(2);
+        $posts = Post::orderBy('updated_at','desc')->paginate(6);
         return view('post.index')->with('posts', $posts);
     }
 
@@ -62,7 +62,7 @@ class PostController extends Controller
      */
     public function show(Post $post)
     {
-        return $post;
+        return view('post.show',compact('post'));
     }
 
     /**
@@ -73,8 +73,7 @@ class PostController extends Controller
      */
     public function edit(Post $post)
     {
-        dd($post);
-        return view('post.edit');
+        return view('post.edit', compact('post'));
     }
 
     /**
@@ -84,9 +83,12 @@ class PostController extends Controller
      * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(PostRequest $request, Post $post)
     {
-        //
+        if ($post->update($request->except('_token', '_method'))) {
+            return back()->with('success', '修改成功');
+        }
+        return back()->withErrors('修改失败');
     }
 
     /**

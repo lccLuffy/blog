@@ -6,6 +6,8 @@
         <div>
             @each('post.item',$posts,'post')
         </div>
-        {!! $posts->links()  !!}
+        <div class="col-md-12">
+            {!! $posts->links()  !!}
+        </div>
     </div>
 @endsection

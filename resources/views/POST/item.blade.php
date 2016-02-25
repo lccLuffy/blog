@@ -1,8 +1,12 @@
-<div class="col-md-3">
-    <div class="panel panel-default">
-        <div class="panel-heading">{{ $post->title }}</div>
-        <div class="panel-body">{!! $post->content !!}</div>
-        <div class="panel-footer">
+<div class="col-md-4">
+
+    <article>
+        <p class="page-header">{{ $post->title }}</p>
+        <p>{!! $post->content !!}</p>
+        <div>
+            <ul class="list-group list-group-item-heading">
+                <li><i class="fa fa-clock-o"></i>{{ $post->updated_at->diffForHumans() }}</li>
+            </ul>
             <a href="{{ route('post.show',$post->id) }}">
                 <button class="btn btn-block">查看</button>
             </a>
@@ -23,5 +27,6 @@
             </a>
             @endcan
         </div>
-    </div>
+    </article>
+
 </div>
