@@ -16,7 +16,6 @@ class CreatePostsTable extends Migration
             $table->increments('id');
             $table->integer('user_id')->unsigned()->index();
             $table->text('title');
-            $table->longText('content_raw');
             $table->longText('content_html');
             $table->string('status', 20);
             $table->softDeletes();

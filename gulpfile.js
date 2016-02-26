@@ -1,5 +1,5 @@
 var elixir = require('laravel-elixir');
-
+var gulp = require('gulp');
 /*
  |--------------------------------------------------------------------------
  | Elixir Asset Management
@@ -13,4 +13,18 @@ var elixir = require('laravel-elixir');
 
 elixir(function(mix) {
     mix.sass('app.scss');
+    gulp.src("vendor/bower_dl/clean-blog/less/**")
+        .pipe(gulp.dest("resources/assets/less/clean-blog"));
+});
+
+/**
+ * 拷贝任何需要的文件
+ *
+ * Do a 'gulp copyfiles' after bower updates
+ */
+gulp.task("copyfiles", function() {
+
+    gulp.src("vendor/bower_dl/clean-blog/less/**")
+        .pipe(gulp.dest("resources/assets/less/clean-blog"));
+
 });

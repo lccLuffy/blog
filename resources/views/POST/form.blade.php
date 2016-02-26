@@ -10,8 +10,7 @@
 <div class="form-group">
     <div class="input-group col-md-12">
         <div class="editor">
-            <textarea id='myEditor' class="form-control" name="content_raw" placeholder="内容">{{ $post->content_raw or old('content_raw') }}</textarea>
-
+            <textarea id='editor' class="form-control" name="content_html" placeholder="内容">{{ $post->content_html or old('content_html') }}</textarea>
         </div>
     </div>
 </div>
@@ -27,6 +26,3 @@
         </select>
     </div>
 </div>
-@section('scripts')
-    @include('vendor.editor.head')
-@endsection
