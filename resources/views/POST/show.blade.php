@@ -1,7 +1,8 @@
 @extends('layouts.app')
 @section('title',$post->title)
 @section('css')
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.10/css/share.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.10/css/share.min.css">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.2.0/styles/default.min.css">
 @endsection
 @section('content')
     <div class="row">
@@ -58,4 +59,14 @@
 @endsection
 @section('scripts')
     <script src="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.10/js/share.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.2.0/highlight.min.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            $("pre[class^='lang']").each(function (i, block) {
+                hljs.highlightBlock(block);
+            });
+            hljs.initHighlightingOnLoad();  // 加这句是为了兼容之前的。
+        });
+    </script>
 @endsection

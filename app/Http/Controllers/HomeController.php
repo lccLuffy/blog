@@ -4,11 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests;
 use App\User;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\File;
-use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Facades\Hash;
-use Mockery\CountValidator\Exception;
 
 class HomeController extends Controller
 {
@@ -19,7 +14,7 @@ class HomeController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth', ['except' => ['welcome', 'index', 'upload']]);
+        $this->middleware('auth', ['except' => ['welcome', 'index']]);
     }
 
     /**
@@ -51,29 +46,4 @@ class HomeController extends Controller
         return view('user.index', compact('user', 'posts'));
     }
 
-    public function upload()
-    {
-        $result = true;
-        try
-        {
-            $finalName = 'blog_'.Hash::make(time());
-            $file = request()->file('picture');
-            $content = File::get($file->getRealPath());
-
-            $disk = Storage::disk('qiniu');
-            $url = '';
-
-            if ($disk->put($finalName, $content)) {
-                $url = $disk->getDriver()->downloadUrl($finalName);
-            }
-        }
-        catch(Exception $o)
-        {
-            $result = false;
-        }
-        return json_encode([
-            'success' => $result,
-            'file_path' => $url,
-        ]);
-    }
 }

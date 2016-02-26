@@ -13,7 +13,6 @@
 
 
 
-Route::post('upload','HomeController@upload');
 
 
 /*
@@ -30,10 +29,12 @@ Route::post('upload','HomeController@upload');
 Route::group(['middleware' => ['web']], function () {
 
     Route::get('/welcome', 'HomeController@welcome');
+
+    Route::post('upload','PostController@uploadPicture');
+
     Route::resource('/post','PostController');
 
     Route::get('user/{user}',['uses'=>'HomeController@showUser','as'=>'user.index']);
-
 });
 
 Route::group(['middleware' => 'web'], function () {

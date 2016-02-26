@@ -32,7 +32,7 @@
         });
 
         var editor, mobileToolbar, toolbar;
-        Simditor.locale = 'zh-CN';
+        
         toolbar = ['title', 'bold', 'italic', 'underline', 'strikethrough', 'fontScale', 'color',
             '|', 'ol', 'ul', 'blockquote', 'code', 'table', '|', 'link', 'image', 'hr', '|', 'indent', 'outdent', 'alignment', 'marked'];
         mobileToolbar = ["bold", "underline", "strikethrough", "color", "ul", "ol"];
@@ -43,11 +43,14 @@
             textarea: $('#editor'),
             toolbar: toolbar,
             pasteImage: true,
+            cleanPaste: true,
             defaultImage: '/simditor-2.3.6/images/image.png',
             upload : {
                 url : 'http://localhost:8000/upload', //文件上传的接口地址
                 fileKey: 'picture', //服务器端获取文件数据的参数名
-                params: null,
+                params: {
+                    '_token':"{{ csrf_token() }}"
+                },
                 connectionCount: 3,
                 leaveConfirm: '正在上传文件'
             }
