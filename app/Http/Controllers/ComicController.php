@@ -80,12 +80,17 @@ class ComicController extends Controller
         }
         catch(\Exception $e)
         {
-            abort($e->getCode(),$e->getMessage());
+            abort(503,$e->getMessage());
         }
 
         return view('comic.index')->with(compact('title','comics','page'));
     }
 
+    /**
+     * @param $id
+     * @param $title
+     * @return $this
+     */
     public function chapter($id,$title)
     {
         $page = request('page',0);
@@ -99,10 +104,16 @@ class ComicController extends Controller
         }
         catch(\Exception $e)
         {
-            abort($e->getCode(),$e->getMessage());
+            abort(503,$e->getMessage());
         }
         return view('comic.chapter')->with(compact('title','chapters','page'));
     }
+
+    /**
+     * @param $id
+     * @param $title
+     * @return $this
+     */
     public function images($id,$title)
     {
         try{
