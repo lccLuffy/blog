@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @section('content')
     <div class="row">
-        <div class="col-lg-10 col-lg-offset-2 col-md-12">
+        <div class="col-lg-10 col-lg-offset-1 col-md-12">
             <div class="panel panel-success">
                 <div class="panel-heading">
                     <span class="lead">{{ $title }}</span>

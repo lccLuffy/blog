@@ -34,7 +34,7 @@
         var editor, mobileToolbar, toolbar;
         Simditor.locale = 'zh-CN';
         toolbar = ['title', 'bold', 'italic', 'underline', 'strikethrough', 'fontScale', 'color',
-            '|', 'ol', 'ul', 'blockquote', 'code', 'table', '|', 'link', 'image', 'hr', '|', 'indent', 'outdent', 'alignment', 'marked'];
+            '|', 'ol', 'ul', 'blockquote', 'code', /*'table',*/ '|', 'link', 'image', 'hr', '|', 'indent', 'outdent', 'alignment', 'marked'];
         mobileToolbar = ["bold", "underline", "strikethrough", "color", "ul", "ol"];
         if (false) {
             toolbar = mobileToolbar;

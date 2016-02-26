@@ -1,6 +1,7 @@
 @extends('layouts.app')
 @section('title',$post->title)
 @section('css')
+    <link rel="stylesheet" href="/simditor-2.3.6/styles/simditor.css"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.10/css/share.min.css">
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.2.0/styles/default.min.css">
 @endsection
@@ -13,7 +14,9 @@
                 <a href="{{ route('post.show',$post->id) }}">
                     <p class="lead">{{ $post->title }}</p>
                 </a>
-                <p>{!! $post->content_html !!}</p>
+                <div>
+                    {!! $post->content_html !!}
+                </div>
                 @foreach($post->tags()->lists('name') as $tag)
                     <i class="fa fa-tag"></i>{{ $tag }}
                 @endforeach
