@@ -3,8 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests;
-use App\Http\Requests\Request;
 use App\User;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Hash;
+use Mockery\CountValidator\Exception;
 
 class HomeController extends Controller
 {
@@ -49,9 +53,27 @@ class HomeController extends Controller
 
     public function upload()
     {
+        $result = true;
+        try
+        {
+            $finalName = 'blog_'.Hash::make(time());
+            $file = request()->file('picture');
+            $content = File::get($file->getRealPath());
+
+            $disk = Storage::disk('qiniu');
+            $url = '';
+
+            if ($disk->put($finalName, $content)) {
+                $url = $disk->getDriver()->downloadUrl($finalName);
+            }
+        }
+        catch(Exception $o)
+        {
+            $result = false;
+        }
         return json_encode([
-            'success' => true,
-            'file_path' => 'http://localhost:8000/'.request()->get('picture'),
+            'success' => $result,
+            'file_path' => $url,
         ]);
     }
 }
