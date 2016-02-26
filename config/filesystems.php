@@ -61,6 +61,18 @@ return [
             'region' => 'your-region',
             'bucket' => 'your-bucket',
         ],
+        'qiniu' => [
+            'driver'  => 'qiniu',
+            'domains' => [
+                'default'   => '7xp8c8.com1.z0.glb.clouddn.com', //你的七牛域名
+                'https'     => 'dn-yourdomain.qbox.me',         //你的HTTPS域名
+                'custom'    => 'lcc-luffy.cn',                //你的自定义域名
+            ],
+            'access_key'=> 'veQWTVTRieyTf5VFTBZW-PmlMY7yrmYa4i7pFIIV',  //AccessKey
+            'secret_key'=> '5CC3hZHg_NpJ7aEdxc4lDmHtcpSrYUVN_ojCfWqE',  //SecretKey
+            'bucket'    => 'public',  //Bucket名字
+            'notify_url'=> '',  //持久化处理回调地址
+        ],
 
     ],
 

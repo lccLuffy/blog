@@ -3,10 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests;
-use App\Tag;
+use App\Http\Requests\Request;
 use App\User;
-use Illuminate\Http\Request;
-use EndaEditor;
 
 class HomeController extends Controller
 {
@@ -17,7 +15,7 @@ class HomeController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth',['except'=>['welcome','index']]);
+        $this->middleware('auth', ['except' => ['welcome', 'index', 'upload']]);
     }
 
     /**
@@ -45,13 +43,15 @@ class HomeController extends Controller
      */
     public function showUser(User $user)
     {
-        $posts = $user->posts()->orderBy('updated_at','desc')->paginate(6);
-        return view('user.index',compact('user','posts'));
+        $posts = $user->posts()->orderBy('updated_at', 'desc')->paginate(6);
+        return view('user.index', compact('user', 'posts'));
     }
+
     public function upload()
     {
-        $data = EndaEditor::uploadImgFile('uploads');
-
-        return json_encode($data);
+        return json_encode([
+            'success' => true,
+            'file_path' => 'http://localhost:8000/'.request()->get('picture'),
+        ]);
     }
 }

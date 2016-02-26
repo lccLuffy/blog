@@ -1,17 +1,16 @@
-<div class="col-md-6">
+<li class="list-group-item list-group-item-heading">
     <article>
         <a href="{{ route('post.show',$post->id) }}">
             <p class="lead">{{ $post->title }}</p>
         </a>
         @foreach($post->tags()->lists('name') as $tag)
-            <span><i class="fa fa-tag"></i>{{ $tag }}</span>
+            <i class="fa fa-tag"></i>{{ $tag }}
         @endforeach
+
         <div>
-            <ul class="list-group list-group-item-heading">
-                <li><i class="fa fa-clock-o"></i>{{ $post->updated_at->diffForHumans() }}</li>
-                <li><i class="fa fa-user"></i><a
-                            href="{{ route('user.index',$post->user_id) }}">{{ $post->user->username }}</a></li>
-            </ul>
+            <span><i class="fa fa-clock-o"></i>{{ $post->updated_at->diffForHumans() }}</span>
+            <span><i class="fa fa-user"></i><a
+                        href="{{ route('user.index',$post->user_id) }}">{{ $post->user->username }}</a></span>
             @can('post.update',$post)
             <form role="form" method="post" action="{{ route('post.destroy',$post->id) }}">
                 {!!  csrf_field() !!}
@@ -30,4 +29,4 @@
             @endcan
         </div>
     </article>
-</div>
+</li>

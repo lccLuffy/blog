@@ -4,8 +4,7 @@
     <link rel="stylesheet" type="text/css" href="/simditor-2.3.6/styles/simditor.css"/>
 @endsection
 @section('content')
-
-    <dic class="row">
+    <div class="row">
         <div class="col-md-12">
             @include('partials.errors')
             @include('partials.success')
@@ -16,8 +15,7 @@
                 <button type="submit" class="btn btn-success">修改</button>
             </form>
         </div>
-    </dic>
-
+    </div>
 @endsection
 @section('scripts')
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.2-rc.1/js/select2.min.js"></script>
@@ -29,8 +27,11 @@
     <script type="text/javascript" src="/simditor-2.3.6/scripts/simditor-marked.js"></script>
 
     <script>
+        $('#tag_select').select2({
+            tags: true
+        });
         var editor, mobileToolbar, toolbar;
-        Simditor.locale = 'zh';
+        Simditor.locale = 'zh-CN';
         toolbar = ['title', 'bold', 'italic', 'underline', 'strikethrough', 'fontScale', 'color',
             '|', 'ol', 'ul', 'blockquote', 'code', 'table', '|', 'link', 'image', 'hr', '|', 'indent', 'outdent', 'alignment', 'marked'];
         mobileToolbar = ["bold", "underline", "strikethrough", "color", "ul", "ol"];

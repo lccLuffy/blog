@@ -27,19 +27,30 @@
     <script type="text/javascript" src="/simditor-2.3.6/scripts/simditor-marked.js"></script>
 
     <script>
+        $('#tag_select').select2({
+            tags:true
+        });
+
         var editor, mobileToolbar, toolbar;
-        Simditor.locale = 'zh';
+        Simditor.locale = 'zh-CN';
         toolbar = ['title', 'bold', 'italic', 'underline', 'strikethrough', 'fontScale', 'color',
             '|', 'ol', 'ul', 'blockquote', 'code', 'table', '|', 'link', 'image', 'hr', '|', 'indent', 'outdent', 'alignment', 'marked'];
         mobileToolbar = ["bold", "underline", "strikethrough", "color", "ul", "ol"];
         if (false) {
             toolbar = mobileToolbar;
-            ``
         }
         editor = new Simditor({
             textarea: $('#editor'),
             toolbar: toolbar,
             pasteImage: true,
+            defaultImage: '/simditor-2.3.6/images/image.png',
+            upload : {
+                url : 'http://localhost:8000/upload', //文件上传的接口地址
+                fileKey: 'picture', //服务器端获取文件数据的参数名
+                params: null,
+                connectionCount: 3,
+                leaveConfirm: '正在上传文件'
+            }
         });
     </script>
 @endsection

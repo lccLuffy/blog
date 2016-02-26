@@ -13,6 +13,9 @@
 
 
 
+Route::post('upload','HomeController@upload');
+
+
 /*
 |--------------------------------------------------------------------------
 | Application Routes
@@ -30,6 +33,7 @@ Route::group(['middleware' => ['web']], function () {
     Route::resource('/post','PostController');
 
     Route::get('user/{user}',['uses'=>'HomeController@showUser','as'=>'user.index']);
+
 });
 
 Route::group(['middleware' => 'web'], function () {
