@@ -48,4 +48,42 @@ class ComicController extends Controller
     const GET_SLIDE_DATA = "http://two.ishuhui.com/imgs.html";
     const URL_USER_LOGIN = "http://www.ishuhui.net/UserCenter/Login";
     const URL_USER_REGISTER = "http://www.ishuhui.net/UserCenter/Regedit";
+
+    /**
+     * @param $ClassifyId
+     * @return $this
+     */
+    public function index($ClassifyId)
+    {
+        $title = '';
+        switch($ClassifyId)
+        {
+            case 0:
+                $title='热血';
+                break;
+            case 2:
+                $title='同人';
+                break;
+            case 3:
+                $title='鼠绘';
+                break;
+            default:
+                abort(404);
+        }
+        $jsonObj = json_decode(file_get_contents(ComicController::GET_BOOK_BY_PARAM.'?ClassifyId='.$ClassifyId));
+        $comics = $jsonObj->Return->List;
+        return view('comic.index')->with(compact('title','comics'));
+    }
+
+    public function chapter($id,$title)
+    {
+        $jsonObj = json_decode(file_get_contents(ComicController::GET_COMIC_BOOK_DATA.'?id='.$id));
+        $chapters = $jsonObj->Return->List;
+        return view('comic.chapter')->with(compact('title','chapters'));
+    }
+    public function images($id)
+    {
+        $html = file_get_contents(ComicController::URL_IMG_CHAPTER.$id);
+        dd($html);
+    }
 }

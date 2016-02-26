@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta property="wb:webmaster" content="4ed6b1566c93d733" />
+    <meta property="wb:webmaster" content="4ed6b1566c93d733"/>
     <title>
         lcc_luffy
         @yield('title')
@@ -55,8 +55,16 @@
             <ul class="nav navbar-nav">
                 <li><a href="{{ route('post.index') }}">文章</a></li>
                 <li><a href="{{ route('post.create') }}">发布</a></li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                       aria-expanded="false">漫画<span class="caret"></span></a>
+                    <ul class="dropdown-menu" role="menu">
+                        <li><a href="{{ url('comic',0) }}"></i>热血</a></li>
+                        <li><a href="{{ url('comic',2) }}"></i>同人</a></li>
+                        <li><a href="{{ url('comic',3) }}"></i>鼠绘</a></li>
+                    </ul>
+                </li>
             </ul>
-
             <!-- Right Side Of Navbar -->
             <ul class="nav navbar-nav navbar-right">
                 <!-- Authentication Links -->
@@ -82,7 +90,7 @@
 <div class="container">
     @yield('content')
 </div>
-        <!-- JavaScripts -->
+<!-- JavaScripts -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 {{-- <script src="{{ elixir('js/app.js') }}"></script> --}}

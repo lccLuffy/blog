@@ -35,6 +35,10 @@ Route::group(['middleware' => ['web']], function () {
     Route::resource('/post','PostController');
 
     Route::get('user/{user}',['uses'=>'UserController@index','as'=>'user.index']);
+
+    Route::get('comic/{ClassifyId}', 'ComicController@index');
+    Route::get('chapter/{id}/{title}', 'ComicController@chapter');
+    Route::get('images/{id}', 'ComicController@images');
 });
 
 Route::group(['middleware' => 'web'], function () {
