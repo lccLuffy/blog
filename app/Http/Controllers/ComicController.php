@@ -2,10 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-
 use App\Http\Requests;
-use App\Http\Controllers\Controller;
+use App\User;
+use Yangqi\Htmldom\Htmldom;
 
 class ComicController extends Controller
 {
@@ -70,20 +69,53 @@ class ComicController extends Controller
             default:
                 abort(404);
         }
-        $jsonObj = json_decode(file_get_contents(ComicController::GET_BOOK_BY_PARAM.'?ClassifyId='.$ClassifyId));
-        $comics = $jsonObj->Return->List;
-        return view('comic.index')->with(compact('title','comics'));
+        $page = request('page',0);
+        try{
+            $jsonObj = json_decode(file_get_contents(ComicController::GET_BOOK_BY_PARAM.'?ClassifyId='.$ClassifyId.'&PageIndex='.$page));
+            $comics = $jsonObj->Return->List;
+            if(count($comics)<1)
+            {
+                return back()->withErrors('没有更多了');
+            }
+        }
+        catch(\Exception $e)
+        {
+            abort($e->getCode(),$e->getMessage());
+        }
+
+        return view('comic.index')->with(compact('title','comics','page'));
     }
 
     public function chapter($id,$title)
     {
-        $jsonObj = json_decode(file_get_contents(ComicController::GET_COMIC_BOOK_DATA.'?id='.$id));
-        $chapters = $jsonObj->Return->List;
-        return view('comic.chapter')->with(compact('title','chapters'));
+        $page = request('page',0);
+        try{
+            $jsonObj = json_decode(file_get_contents(ComicController::GET_COMIC_BOOK_DATA.'?id='.$id.'&PageIndex='.$page));
+            $chapters = $jsonObj->Return->List;
+            if(count($chapters)<1)
+            {
+                return back()->withErrors('没有更多了');
+            }
+        }
+        catch(\Exception $e)
+        {
+            abort($e->getCode(),$e->getMessage());
+        }
+        return view('comic.chapter')->with(compact('title','chapters','page'));
     }
-    public function images($id)
+    public function images($id,$title)
     {
-        $html = file_get_contents(ComicController::URL_IMG_CHAPTER.$id);
-        dd($html);
+        try{
+            $html = file_get_contents(ComicController::URL_IMG_CHAPTER.$id);
+            $dom = new Htmldom($html);
+            $images=[];
+            foreach($dom->find('img') as $element)
+                $images[]= $element->src;
+        }
+        catch(\Exception $e)
+        {
+            abort(503);
+        }
+        return view('comic.images')->with(compact('images','title'));
     }
 }

@@ -38,7 +38,7 @@ Route::group(['middleware' => ['web']], function () {
 
     Route::get('comic/{ClassifyId}', 'ComicController@index');
     Route::get('chapter/{id}/{title}', 'ComicController@chapter');
-    Route::get('images/{id}', 'ComicController@images');
+    Route::get('images/{id}/{title}', 'ComicController@images');
 });
 
 Route::group(['middleware' => 'web'], function () {
