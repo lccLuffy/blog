@@ -35,15 +35,4 @@ class HomeController extends Controller
     {
         return view('index');
     }
-
-    /**
-     * @param User $user
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
-     */
-    public function showUser(User $user)
-    {
-        $posts = $user->posts()->orderBy('updated_at', 'desc')->paginate(6);
-        return view('user.index', compact('user', 'posts'));
-    }
-
 }
