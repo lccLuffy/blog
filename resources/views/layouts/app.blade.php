@@ -11,16 +11,15 @@
     </title>
 
     <!-- Fonts -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css" rel='stylesheet'
-          type='text/css'>
+    <link href="//cdn.bootcss.com/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Lato:100,300,400,700" rel='stylesheet' type='text/css'>
 
     <!-- Styles -->
     <link href="{{ elixir('css/app.css') }}" rel="stylesheet">
     @yield('css')
 </head>
-<body id="app-layout">
-<nav class="navbar navbar-default">
+<body id="app-layout" style="margin-top: 100px;">
+<nav class="navbar navbar-default navbar-fixed-top">
     <div class="container">
         <div class="navbar-header">
 

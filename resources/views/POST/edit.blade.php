@@ -20,14 +20,7 @@
 @endsection
 @section('scripts')
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.2-rc.1/js/select2.min.js"></script>
-    {{--<script type="text/javascript" src="/simditor-2.3.6/scripts/module.js"></script>
-    <script type="text/javascript" src="/simditor-2.3.6/scripts/hotkeys.js"></script>
-    <script type="text/javascript" src="/simditor-2.3.6/scripts/uploader.js"></script>
-    <script type="text/javascript" src="/simditor-2.3.6/scripts/simditor.js"></script>
-    <script type="text/javascript" src="/simditor-2.3.6/scripts/marked.js"></script>
-    <script type="text/javascript" src="/simditor-2.3.6/scripts/simditor-marked.js"></script>
-    <script type="text/javascript" src="/simditor-2.3.6/scripts/beautify-html.js"></script>
-    <script type="text/javascript" src="/simditor-2.3.6/scripts/simditor-html.js"></script>--}}
+
     <script src="{{ elixir('js/simditor.js') }}"></script>
     <script>
         $('#tag_select').select2({
@@ -37,7 +30,7 @@
         var editor, mobileToolbar, toolbar;
         Simditor.locale = 'zh-CN';
         toolbar = ['title', 'bold', 'italic', 'underline', 'strikethrough', 'fontScale', 'color',
-            '|', 'ol', 'ul', 'blockquote', 'code', /*'table',*/ '|', 'link', 'image', 'hr', '|', 'indent', 'outdent', 'alignment', '|','html'];
+            '|', 'ol', 'ul', 'blockquote', 'code',/* 'table', */'|', 'link', 'image', 'hr', '|', 'indent', 'outdent', 'alignment', '|','html'];
         mobileToolbar = ["bold", "underline", "strikethrough", "color", "ul", "ol"];
         if (false) {
             toolbar = mobileToolbar;

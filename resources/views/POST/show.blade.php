@@ -1,9 +1,9 @@
 @extends('layouts.app')
 @section('title',$post->title)
 @section('css')
-    <link rel="stylesheet" href="/simditor-2.3.6/styles/simditor.css"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.10/css/share.min.css">
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.2.0/styles/default.min.css">
+    <link href="{{ elixir('css/simditor/app.css') }}" rel="stylesheet">
 @endsection
 @section('content')
     <div class="row">
@@ -75,7 +75,6 @@
                     内容
                 </div>
             </div>
-            @include('sidebar.search')
         </aside>
     </div>
 
@@ -83,7 +82,6 @@
 @section('scripts')
     <script src="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.10/js/share.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.2.0/highlight.min.js"></script>
-
     <script>
         $(document).ready(function () {
             $("pre[class^='lang']").each(function (i, block) {

@@ -1,11 +1,27 @@
 <li class="list-group-item list-group-item-heading">
     <article>
-        <a href="{{ route('post.show',$post->id) }}">
-            <p class="lead">{{ $post->title }}</p>
-        </a>
-        {{--@foreach($post->tags()->lists('name') as $tag)
-            <i class="fa fa-tag"></i>{{ $tag }}
-        @endforeach--}}
+        <div class="page-header">
+            <a href="{{ route('post.show',$post->id) }}">
+                <p class="lead">{{ $post->title }}</p>
+            </a>
+            <small>
+                <i class="fa fa-user"></i><a
+                        href="{{ route('user.index',$post->user_id) }}"><b>{{ ' '.$post->user->username }}</b></a>
+                <i class="fa fa-calendar"></i>{{ ' '.$post->updated_at->diffForHumans() }}
+            </small>
+        </div>
+
+        <p>
+            {!! substr($post->content_html,0,100) !!}
+        </p>
+
+        <p>
+            <i class="fa fa-tag"></i>
+            @foreach($post->tags()->lists('name') as $tag)
+                <span class="label label-default">{{ $tag }}</span>
+            @endforeach
+        </p>
+
 
         {{--<div>
            --}}{{-- <span><i class="fa fa-clock-o"></i>{{ $post->updated_at->diffForHumans() }}</span>

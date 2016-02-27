@@ -28,7 +28,7 @@
         var editor, mobileToolbar, toolbar;
 
         toolbar = ['title', 'bold', 'italic', 'underline', 'strikethrough', 'fontScale', 'color',
-            '|', 'ol', 'ul', 'blockquote', 'code', /*'table',*/ '|', 'link', 'image', 'hr', '|', 'indent', 'outdent', 'alignment', '|', 'html'];
+            '|', 'ol', 'ul', 'blockquote', 'code', /*'table', */'|', 'link', 'image', 'hr', '|', 'indent', 'outdent', 'alignment', '|', 'html'];
         mobileToolbar = ["bold", "underline", "strikethrough", "color", "ul", "ol"];
         if (false) {
             toolbar = mobileToolbar;

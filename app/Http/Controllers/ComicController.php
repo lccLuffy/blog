@@ -69,18 +69,18 @@ class ComicController extends Controller
             default:
                 abort(404);
         }
-        $page = request('page',0);
-        try{
-            $jsonObj = json_decode(file_get_contents(ComicController::GET_BOOK_BY_PARAM.'?ClassifyId='.$ClassifyId.'&PageIndex='.$page));
-            $comics = $jsonObj->Return->List;
-            if(count($comics)<1)
-            {
-                return back()->withErrors('没有更多了');
+            $page = request('page',0);
+            try{
+                $jsonObj = json_decode(file_get_contents(ComicController::GET_BOOK_BY_PARAM.'?ClassifyId='.$ClassifyId.'&PageIndex='.$page));
+                $comics = $jsonObj->Return->List;
+                if(count($comics)<1)
+                {
+                    return back()->withErrors('没有更多了');
+                }
             }
-        }
-        catch(\Exception $e)
-        {
-            abort(503,$e->getMessage());
+            catch(\Exception $e)
+            {
+                abort(503,$e->getMessage());
         }
 
         return view('comic.index')->with(compact('title','comics','page'));
