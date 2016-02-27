@@ -7736,9 +7736,9 @@ if (typeof module !== 'undefined' && typeof exports === 'object') {
     style_html(html_source, options);
 
   The options are:
-    indent_inner_html (default false)  ¡ª indent <head> and <body> sections,
-    indent_size (default 4)          ¡ª indentation size,
-    indent_char (default space)      ¡ª character to indent with,
+    indent_inner_html (default false)  ï¿½ï¿½ indent <head> and <body> sections,
+    indent_size (default 4)          ï¿½ï¿½ indentation size,
+    indent_char (default space)      ï¿½ï¿½ character to indent with,
     wrap_line_length (default 250)            -  maximum amount of characters per line (0 = disable)
     brace_style (default "collapse") - "collapse" | "expand" | "end-expand" | "none"
             put braces on the same line as control statements (default), or put braces on own line (Allman / ANSI style), or just put end braces on own line, or attempt to keep them where they are.
