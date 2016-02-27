@@ -13,18 +13,23 @@ var gulp = require('gulp');
 
 elixir(function(mix) {
     mix.sass('app.scss');
-    gulp.src("vendor/bower_dl/clean-blog/less/**")
-        .pipe(gulp.dest("resources/assets/less/clean-blog"));
+
+    mix.sass(['editor.scss','fonticon.scss','simditor.scss','simditor-html.scss'],'public/css/simditor');
+
+    mix.scripts([
+        'simditor/module.js',
+        'simditor/hotkeys.js',
+        'simditor/uploader.js',
+        'simditor/simditor.js',
+        'simditor/marked.js',
+        'simditor/simditor-marked.js',
+        'simditor/beautify-html.js',
+        'simditor/simditor-html.js'
+    ],'public/js/simditor.js');
+
+
+
+
+    mix.version(['css/app.css','css/simditor/app.css','js/simditor.js']);
 });
 
-/**
- * 拷贝任何需要的文件
- *
- * Do a 'gulp copyfiles' after bower updates
- */
-gulp.task("copyfiles", function() {
-
-    gulp.src("vendor/bower_dl/clean-blog/less/**")
-        .pipe(gulp.dest("resources/assets/less/clean-blog"));
-
-});

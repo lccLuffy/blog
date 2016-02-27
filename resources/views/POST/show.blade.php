@@ -8,8 +8,6 @@
 @section('content')
     <div class="row">
         <main class="col-md-9">
-
-
             <article>
                 <a href="{{ route('post.show',$post->id) }}">
                     <p class="lead">{{ $post->title }}</p>
@@ -46,6 +44,27 @@
             <div class="panel-footer">
                 <div class="social-share"></div>
             </div>
+            <div>
+                <!-- 多说评论框 start -->
+                <div class="ds-thread" data-thread-key="{{ $post->id }}" data-title="{{ $post->title }}"
+                     data-url="{{ route('post.show',$post->id) }}"></div>
+                <!-- 多说评论框 end -->
+                <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+                <script type="text/javascript">
+                    var duoshuoQuery = {short_name: "lcc-luffy"};
+                    (function () {
+                        var ds = document.createElement('script');
+                        ds.type = 'text/javascript';
+                        ds.async = true;
+                        ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.unstable.js';
+                        ds.charset = 'UTF-8';
+                        (document.getElementsByTagName('head')[0]
+                        || document.getElementsByTagName('body')[0]).appendChild(ds);
+                    })();
+                </script>
+                <!-- 多说公共JS代码 end -->
+
+            </div>
         </main>
         <aside class="col-md-3">
             <div class="panel panel-info">
@@ -59,6 +78,7 @@
             @include('sidebar.search')
         </aside>
     </div>
+
 @endsection
 @section('scripts')
     <script src="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.10/js/share.min.js"></script>

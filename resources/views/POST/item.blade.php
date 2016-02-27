@@ -3,30 +3,28 @@
         <a href="{{ route('post.show',$post->id) }}">
             <p class="lead">{{ $post->title }}</p>
         </a>
-        @foreach($post->tags()->lists('name') as $tag)
+        {{--@foreach($post->tags()->lists('name') as $tag)
             <i class="fa fa-tag"></i>{{ $tag }}
-        @endforeach
+        @endforeach--}}
 
-        <div>
-            <span><i class="fa fa-clock-o"></i>{{ $post->updated_at->diffForHumans() }}</span>
+        {{--<div>
+           --}}{{-- <span><i class="fa fa-clock-o"></i>{{ $post->updated_at->diffForHumans() }}</span>
             <span><i class="fa fa-user"></i><a
-                        href="{{ route('user.index',$post->user_id) }}">{{ $post->user->username }}</a></span>
-            @can('post.update',$post)
+                        href="{{ route('user.index',$post->user_id) }}">{{ $post->user->username }}</a></span>--}}{{--
+            --}}{{--@can('post.update',$post)
             <form role="form" method="post" action="{{ route('post.destroy',$post->id) }}">
                 {!!  csrf_field() !!}
                 <input type="hidden" name="_method" value="delete">
-                <button type="submit" class="btn btn-danger">
-                    <i class="fa fa-times-circle"></i> 删除
+                <button type="submit">
+                     删除
                 </button>
             </form>
             @endcan
             @can('post.update',$post)
             <a href="{{ route('post.edit',$post->id) }}">
-                <button type="submit" class="btn btn-info">
-                    <i class="fa fa-edit"></i> 编辑
-                </button>
+                编辑
             </a>
-            @endcan
-        </div>
+            @endcan--}}{{--
+        </div>--}}
     </article>
 </li>
