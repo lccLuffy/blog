@@ -14,7 +14,11 @@
  * @param string $suffix
  * @return string
  */
-function fetchDescription($string,$length,$suffix='...')
+
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\File;
+
+function fetchDescription($string, $length, $suffix = '...')
 {
     $resultString = '';
     $string = html_entity_decode(trim(strip_tags($string)), ENT_QUOTES, 'UTF-8');
@@ -45,4 +49,22 @@ function fetchDescription($string,$length,$suffix='...')
 function defaultAvatar()
 {
     return 'http://localhost:8000/images/image.png';
+}
+
+/**
+ * @param $pictureName
+ * @param $file
+ * @param bool $getUrl
+ * @return bool
+ */
+function uploadPicture($pictureName, $file, $getUrl = true)
+{
+    $content = File::get($file->getRealPath());
+
+    $disk = Storage::disk('qiniu');
+
+    if ($disk->put($pictureName, $content)) {
+        return $getUrl ? $disk->getDriver()->downloadUrl($pictureName) : true;
+    }
+    return false;
 }

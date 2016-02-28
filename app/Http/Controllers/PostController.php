@@ -5,14 +5,11 @@ namespace App\Http\Controllers;
 use App\Http\Requests;
 use App\Http\Requests\PostRequest;
 use App\Post;
-use App\Tag;
 use Carbon\Carbon;
 use EndaEditor;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Storage;
 use Mockery\CountValidator\Exception;
 
 class PostController extends Controller
@@ -142,27 +139,21 @@ class PostController extends Controller
         try
         {
             $finalName = 'blog_'.$request->user()->username.'_'.Hash::make(time());
-            $file = $request->file('picture');
-            $content = File::get($file->getRealPath());
 
-            $disk = Storage::disk('qiniu');
-            $url = '';
-
-            if ($disk->put($finalName, $content)) {
-                $url = $disk->getDriver()->downloadUrl($finalName);
-            }
+            $url = uploadPicture($finalName,$request->file('picture'));
         }
         catch(Exception $o)
         {
             $result = false;
         }
 
-        if($result)
+        if($url)
         {
             $msg = '上传成功';
         }
         else
         {
+            $result = false;
             $msg = '上传失败';
         }
         return json_encode([

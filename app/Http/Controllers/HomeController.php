@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests;
-use App\User;
+
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
@@ -33,6 +34,15 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return redirect()->route('post.index');
+        return view('index');
+    }
+
+    public function upload(Request $request)
+    {
+        $result = uploadPicture('avatar_' . Auth::user()->username, $request->file('picture'),false);
+        return response()->json([
+            'success' => $result,
+            'message' => $result ? 'success' : "fail"
+        ]);
     }
 }
