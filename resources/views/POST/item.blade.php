@@ -7,7 +7,7 @@
             <small>
                 <i class="fa fa-user"></i><a
                         href="{{ route('user.index',$post->user_id) }}"><b>{{ ' '.$post->user->username }}</b></a>
-                <i class="fa fa-calendar"></i>{{ ' '.$post->updated_at->diffForHumans() }}
+                <i class="fa fa-calendar"></i>{{ ' '.$post->created_at->diffForHumans() }}
             </small>
         </div>
 

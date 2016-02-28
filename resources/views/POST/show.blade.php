@@ -47,8 +47,6 @@
 
         <main class="col-md-9">
             <div class="panel panel-default">
-
-
                 <div class="panel-heading">
                     {{--头像--}}
 
@@ -96,11 +94,14 @@
                 @endif
 
             </div>
-
-            <div class="social-share"></div>
-            <div>
-                <div class="ds-thread" data-thread-key="{{ $post->id }}" data-title="{{ $post->title }}"
-                     data-url="{{ route('post.show',$post->id) }}"></div>
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <div class="social-share"></div>
+                </div>
+                <div class="panel-body">
+                    <div class="ds-thread" data-thread-key="{{ $post->id }}" data-title="{{ $post->title }}"
+                         data-url="{{ route('post.show',$post->id) }}"></div>
+                </div>
             </div>
         </main>
         <aside class="col-md-3">
