@@ -6,6 +6,9 @@
     <link href="{{ elixir('css/simditor/app.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="http://localhost:8000/css/code/monokai-sublime.css">
 @endsection
+@section('description')
+    {{ $post->title }}
+@endsection
 @section('content')
     <div class="row">
         {{--删除文章--}}
@@ -57,12 +60,12 @@
 
                     {{--标题--}}
 
-                    <p class="lead">{{ $post->title }}</p>
+                    <p class="lead"><b>{{ $post->title }}</b></p>
 
                     {{--信息--}}
                     <i class="fa fa-user"></i><a
-                            href="{{ route('user.index',$post->user_id) }}"><b>{{ '•'.$post->user->username }}</b></a>
-                    <i class="fa fa-calendar"></i>{{ '•'.$post->created_at->format('Y/m/d  h:i') }}
+                            href="{{ route('user.index',$post->user_id) }}"><b>{{ $post->user->username }}</b></a>
+                    •<i class="fa fa-calendar"></i>{{ $post->created_at->format('y/m/d  h:i') }}
 
                     {{ '•'.$post->view_count }}阅读
                     @can('post.update',$post)
