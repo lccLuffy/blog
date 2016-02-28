@@ -38,3 +38,11 @@ function fetchDescription($string,$length,$suffix='...')
     }
     return $resultString;
 }
+
+/**
+ * @return string
+ */
+function defaultAvatar()
+{
+    return 'http://localhost:8000/images/image.png';
+}

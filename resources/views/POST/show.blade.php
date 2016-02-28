@@ -46,12 +46,27 @@
 
 
         <main class="col-md-9">
-            <article>
-                <p class="lead">{{ $post->title }}</p>
-                <p>
+            <div class="panel panel-default">
+
+
+                <div class="panel-heading">
+                    {{--头像--}}
+
+                    <div class="pull-right">
+                        <img src="{{ $post->user->avatar?$post->user->avatar:defaultAvatar() }}"
+                             class="img-circle img-thumbnail" style="width:65px; height:65px;">
+                    </div>
+
+                    {{--标题--}}
+
+                    <p class="lead">{{ $post->title }}</p>
+
+                    {{--信息--}}
                     <i class="fa fa-user"></i><a
-                            href="{{ route('user.index',$post->user_id) }}"><b>{{ ' '.$post->user->username }}</b></a>
-                    <i class="fa fa-calendar"></i>{{ ' '.$post->updated_at->format('Y/m/d  h:i') }}
+                            href="{{ route('user.index',$post->user_id) }}"><b>{{ '•'.$post->user->username }}</b></a>
+                    <i class="fa fa-calendar"></i>{{ '•'.$post->created_at->format('Y/m/d  h:i') }}
+
+                    {{ '•'.$post->view_count }}阅读
                     @can('post.update',$post)
                     <small>
                         <button type="button" class="btn btn-xs btn-success">
@@ -65,12 +80,10 @@
                         </button>
                     </small>
                     @endcan
-                </p>
+                </div>
 
-                <div class="panel panel-default">
-                    <div class="panel-body">
-                        {!! $post->content_html !!}
-                    </div>
+                <div class="panel-body">
+                    {!! $post->content_html !!}
                 </div>
 
                 @if(count($tags = $post->tags()->lists('name')) > 0)
@@ -82,8 +95,7 @@
                     </p>
                 @endif
 
-
-            </article>
+            </div>
 
             <div class="social-share"></div>
             <div>
