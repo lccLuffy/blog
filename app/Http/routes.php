@@ -11,6 +11,14 @@
 |
 */
 
+use App\Tag;
+
+
+Route::group(['prefix' => 'api'], function () {
+
+    Route::get('tags', 'APIController@tags');
+
+});
 
 /*
 |--------------------------------------------------------------------------
@@ -27,15 +35,17 @@ Route::group(['middleware' => ['web']], function () {
 
     Route::get('/welcome', 'HomeController@welcome');
 
-    Route::post('upload','PostController@uploadPicture');
+    Route::post('upload', 'PostController@uploadPicture');
 
-    Route::resource('/post','PostController');
+    Route::resource('/post', 'PostController');
 
-    Route::get('user/{user}',['uses'=>'UserController@index','as'=>'user.index']);
+    Route::get('user/{user}', ['uses' => 'UserController@index', 'as' => 'user.index']);
 
     Route::get('comic/{ClassifyId}', 'ComicController@index');
     Route::get('chapter/{id}/{title}', 'ComicController@chapter');
     Route::get('images/{id}/{title}', 'ComicController@images');
+
+    Route::get('onepiece/parse', 'ComicController@onepieceParse');
 });
 
 Route::group(['middleware' => 'web'], function () {

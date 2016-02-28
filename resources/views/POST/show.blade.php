@@ -4,66 +4,91 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.10/css/share.min.css">
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.2.0/styles/default.min.css">
     <link href="{{ elixir('css/simditor/app.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="http://localhost:8000/css/code/monokai-sublime.css">
 @endsection
 @section('content')
     <div class="row">
+        {{--删除文章--}}
+        <div class="modal fade" id="modal-delete">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">
+                            ×
+                        </button>
+                        <h4 class="modal-title">确认删除</h4>
+                    </div>
+                    <div class="modal-body">
+                        <p class="lead">
+                            <i class="fa fa-question-circle fa-lg"></i>
+                            您确定要删除文章
+                            <kbd><span id="delete-file-name1">{{ $post->title }}</span></kbd>
+                            吗?
+                            <small><i>[可恢复]</i></small>
+                        </p>
+                    </div>
+                    <div class="modal-footer">
+                        <form role="form" method="post" action="{{ route('post.destroy',$post->id) }}">
+                            {!!  csrf_field() !!}
+                            <input type="hidden" name="_method" value="delete">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">
+                                取消
+                            </button>
+
+                            <button type="submit" class="btn btn-danger">
+                                删除
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
         <main class="col-md-9">
             <article>
-                <a href="{{ route('post.show',$post->id) }}">
-                    <p class="lead">{{ $post->title }}</p>
-                </a>
-                <div>
-                    {!! $post->content_html !!}
-                </div>
-                @foreach($post->tags()->lists('name') as $tag)
-                    <i class="fa fa-tag"></i>{{ $tag }}
-                @endforeach
+                <p class="lead">{{ $post->title }}</p>
+                <p>
+                    <i class="fa fa-user"></i><a
+                            href="{{ route('user.index',$post->user_id) }}"><b>{{ ' '.$post->user->username }}</b></a>
+                    <i class="fa fa-calendar"></i>{{ ' '.$post->updated_at->format('Y/m/d  h:i') }}
+                    @can('post.update',$post)
+                    <small>
+                        <button type="button" class="btn btn-xs btn-success">
+                            <a href="{{ route('post.edit',$post->id) }}"><i class="fa fa-edit"></i>编辑</a>
+                        </button>
 
-                <div>
-                    <span><i class="fa fa-clock-o"></i>{{ $post->updated_at->diffForHumans() }}</span>
-            <span><i class="fa fa-user"></i><a
-                        href="{{ route('user.index',$post->user_id) }}">{{ $post->user->username }}</a></span>
-                    @can('post.update',$post)
-                    <form role="form" method="post" action="{{ route('post.destroy',$post->id) }}">
-                        {!!  csrf_field() !!}
-                        <input type="hidden" name="_method" value="delete">
-                        <button type="submit" class="btn btn-danger">
-                            <i class="fa fa-times-circle"></i> 删除
+                        <button type="button" class="btn btn-xs btn-danger" data-toggle="modal"
+                                data-target="#modal-delete">
+                            <i class="fa fa-times-circle"></i>
+                            删除
                         </button>
-                    </form>
+                    </small>
                     @endcan
-                    @can('post.update',$post)
-                    <a href="{{ route('post.edit',$post->id) }}">
-                        <button type="submit" class="btn btn-info">
-                            <i class="fa fa-edit"></i> 编辑
-                        </button>
-                    </a>
-                    @endcan
+                </p>
+
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        {!! $post->content_html !!}
+                    </div>
                 </div>
+
+                @if(count($tags = $post->tags()->lists('name')) > 0)
+                    <p>
+                        <i class="fa fa-tag"></i>
+                        @foreach($tags as $tag)
+                            <span class="label label-default">{{ $tag }}</span>
+                        @endforeach
+                    </p>
+                @endif
+
+
             </article>
-            <div class="panel-footer">
-                <div class="social-share"></div>
-            </div>
+
+            <div class="social-share"></div>
             <div>
-                <!-- 多说评论框 start -->
                 <div class="ds-thread" data-thread-key="{{ $post->id }}" data-title="{{ $post->title }}"
                      data-url="{{ route('post.show',$post->id) }}"></div>
-                <!-- 多说评论框 end -->
-                <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
-                <script type="text/javascript">
-                    var duoshuoQuery = {short_name: "lcc-luffy"};
-                    (function () {
-                        var ds = document.createElement('script');
-                        ds.type = 'text/javascript';
-                        ds.async = true;
-                        ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.unstable.js';
-                        ds.charset = 'UTF-8';
-                        (document.getElementsByTagName('head')[0]
-                        || document.getElementsByTagName('body')[0]).appendChild(ds);
-                    })();
-                </script>
-                <!-- 多说公共JS代码 end -->
-
             </div>
         </main>
         <aside class="col-md-3">
@@ -84,10 +109,27 @@
     <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.2.0/highlight.min.js"></script>
     <script>
         $(document).ready(function () {
-            $("pre[class^='lang']").each(function (i, block) {
+            /*$("pre[class^='lang']").each(function (i, block) {
+             hljs.highlightBlock(block);
+             });*/
+            $('pre code').each(function (i, block) {
                 hljs.highlightBlock(block);
             });
-            hljs.initHighlightingOnLoad();  // 加这句是为了兼容之前的。
         });
+
+        var duoshuoQuery = {short_name: "lcc-luffy"};
+        (function () {
+            var ds = document.createElement('script');
+            ds.type = 'text/javascript';
+            ds.async = true;
+            ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.unstable.js';
+            ds.charset = 'UTF-8';
+            (document.getElementsByTagName('head')[0]
+            || document.getElementsByTagName('body')[0]).appendChild(ds);
+        })();
+
+        function deletePost() {
+            $("#modal-file-delete").modal("show");
+        }
     </script>
 @endsection

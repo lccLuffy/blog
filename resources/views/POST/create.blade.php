@@ -21,18 +21,25 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.2-rc.1/js/select2.min.js"></script>
     <script src="{{ elixir('js/simditor.js') }}"></script>
     <script>
-        $('#tag_select').select2({
-            tags: true
+
+
+        $.getJSON("{{url('api/tags')}}", function (json) {
+            $('#tag_select').select2({
+                tags: true,
+                maximumSelectionLength: 5,
+                data:json
+            });
+
         });
 
-        var editor, mobileToolbar, toolbar;
+        var editor/*, mobileToolbar*/, toolbar;
 
         toolbar = ['title', 'bold', 'italic', 'underline', 'strikethrough', 'fontScale', 'color',
             '|', 'ol', 'ul', 'blockquote', 'code', /*'table', */'|', 'link', 'image', 'hr', '|', 'indent', 'outdent', 'alignment', '|', 'html'];
-        mobileToolbar = ["bold", "underline", "strikethrough", "color", "ul", "ol"];
+        /*mobileToolbar = ["bold", "underline", "strikethrough", "color", "ul", "ol"];
         if (false) {
             toolbar = mobileToolbar;
-        }
+        }*/
         editor = new Simditor({
             textarea: $('#editor'),
             toolbar: toolbar,

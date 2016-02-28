@@ -18,8 +18,8 @@
     <link href="{{ elixir('css/app.css') }}" rel="stylesheet">
     @yield('css')
 </head>
-<body id="app-layout" style="margin-top: 100px;">
-<nav class="navbar navbar-default navbar-fixed-top">
+<body id="app-layout">
+<nav class="navbar navbar-default">
     <div class="container">
         <div class="navbar-header">
 
@@ -50,6 +50,7 @@
                         <li><a href="{{ url('comic',0) }}"></i>热血</a></li>
                         <li><a href="{{ url('comic',2) }}"></i>同人</a></li>
                         <li><a href="{{ url('comic',3) }}"></i>鼠绘</a></li>
+                        <li><a href="{{ url('onepiece/parse') }}"></i>海贼分析</a></li>
                     </ul>
                 </li>
             </ul>

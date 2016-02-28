@@ -23,8 +23,12 @@
 
     <script src="{{ elixir('js/simditor.js') }}"></script>
     <script>
-        $('#tag_select').select2({
-            tags:true
+        $.getJSON("{{url('api/tags')}}", function (json) {
+            $('#tag_select').select2({
+                tags: true,
+                maximumSelectionLength: 5,
+                data:json
+            });
         });
 
         var editor, mobileToolbar, toolbar;

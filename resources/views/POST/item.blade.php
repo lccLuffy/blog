@@ -12,15 +12,17 @@
         </div>
 
         <p>
-            {!! substr($post->content_html,0,100) !!}
+            {{ fetchDescription($post->content_html,128) }}
         </p>
 
-        <p>
-            <i class="fa fa-tag"></i>
-            @foreach($post->tags()->lists('name') as $tag)
-                <span class="label label-default">{{ $tag }}</span>
-            @endforeach
-        </p>
+        @if(count($tags = $post->tags()->lists('name')) > 0)
+            <p>
+                <i class="fa fa-tag"></i>
+                @foreach($tags as $tag)
+                    <span class="label label-default">{{ $tag }}</span>
+                @endforeach
+            </p>
+        @endif
 
 
         {{--<div>

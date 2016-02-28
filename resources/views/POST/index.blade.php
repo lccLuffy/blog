@@ -7,8 +7,6 @@
             <ol class="list-group">
                 @each('post.item',$posts,'post')
             </ol>
-        </div>
-        <div class="col-md-8">
             {!! $posts->links()  !!}
         </div>
     </div>

@@ -7,11 +7,34 @@
  */
 
 /**
- * @param $str
+ *
+ *
+ * @param $string
  * @param $length
+ * @param string $suffix
  * @return string
  */
-function fetchDescription($str,$length)
+function fetchDescription($string,$length,$suffix='...')
 {
-    return substr($str,0,$length);
+    $resultString = '';
+    $string = html_entity_decode(trim(strip_tags($string)), ENT_QUOTES, 'UTF-8');
+    $strLength = strlen($string);
+    for ($i = 0; (($i < $strLength) && ($length > 0)); $i++) {
+        if ($number = strpos(str_pad(decbin(ord(substr($string, $i, 1))), 8, '0', STR_PAD_LEFT), '0')) {
+            if ($length < 1.0) {
+                break;
+            }
+            $resultString .= substr($string, $i, $number);
+            $length -= 1.0;
+            $i += $number - 1;
+        } else {
+            $resultString .= substr($string, $i, 1);
+            $length -= 0.5;
+        }
+    }
+    $resultString = htmlspecialchars($resultString, ENT_QUOTES, 'UTF-8');
+    if ($i < $strLength) {
+        $resultString .= $suffix;
+    }
+    return $resultString;
 }

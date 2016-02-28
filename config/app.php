@@ -52,7 +52,7 @@ return [
     |
     */
 
-    'timezone' => 'UTC',
+    'timezone' => 'Asia/Shanghai',
 
     /*
     |--------------------------------------------------------------------------
@@ -149,6 +149,7 @@ return [
         Illuminate\View\ViewServiceProvider::class,
         zgldh\QiniuStorage\QiniuFilesystemServiceProvider::class,
         Yangqi\Htmldom\HtmldomServiceProvider::class,
+
         /*
          * Application Service Providers...
          */

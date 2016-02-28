@@ -5,9 +5,12 @@ namespace App\Http\Controllers;
 use App\Http\Requests;
 use App\Http\Requests\PostRequest;
 use App\Post;
+use App\Tag;
+use Carbon\Carbon;
 use EndaEditor;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
 use Mockery\CountValidator\Exception;
@@ -76,6 +79,10 @@ class PostController extends Controller
      */
     public function edit(Post $post)
     {
+        if ($this->cannotUpdatePost($post)) {
+            abort(403);
+        }
+
         return view('post.edit', compact('post'));
     }
 
@@ -90,7 +97,12 @@ class PostController extends Controller
      */
     public function update(PostRequest $request, Post $post)
     {
+        if ($this->cannotUpdatePost($post)) {
+            abort(403);
+        }
+
         $post->syncTags($request->get('tags', []));
+        $post->setUpdatedAt(Carbon::now());
         if ($post->update($request->updatingData()))
         {
             return back()->with('success', '修改成功');
@@ -108,11 +120,15 @@ class PostController extends Controller
      */
     public function destroy(Post $post)
     {
-        if ($post->delete()) {
-            $post->tags()->detach();
-            return back()->with('success', '删除成功');
+        if ($this->cannotUpdatePost($post)) {
+            abort(403);
         }
-        return back()->with('success', '删除失败');
+
+        if ($post->delete()) {
+            //$post->tags()->detach();  软删除，不要删除标签
+            return redirect()->route('post.index')->with('success', '删除成功');
+        }
+        return redirect()->route('post.index')->with('success', '删除失败');
     }
 
     /**
@@ -155,4 +171,12 @@ class PostController extends Controller
         ]);
     }
 
+    /**
+     * @param Post $post
+     * @return boolean
+     */
+    public function cannotUpdatePost(Post $post)
+    {
+        return Gate::denies('post.update', $post);
+    }
 }

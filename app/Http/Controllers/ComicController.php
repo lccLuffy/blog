@@ -129,4 +129,25 @@ class ComicController extends Controller
         }
         return view('comic.images')->with(compact('images','title'));
     }
+
+    /**
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function onepieceParse()
+    {
+        $html = file_get_contents('http://www.4399dmw.com/haizeiwang/juqing/');
+        $dom = new Htmldom($html);
+        $list = $dom->find('div.g_articlelist li');
+        $items = [];
+        foreach($list as $li)
+        {
+            $item = [];
+            $item['src'] = $li->find('img', 0)->src;
+            $item['title'] = $li->find('h3', 0)->plaintext;
+            $item['description'] = $li->find('p', 0)->plaintext;
+            $item['href'] = 'http://www.4399dmw.com'.$li->find('a', 0)->href;
+            $items[]=$item;
+        }
+        return view('comic.parse_list',compact('items'));
+    }
 }
