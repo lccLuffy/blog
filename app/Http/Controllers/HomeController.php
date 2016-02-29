@@ -39,7 +39,7 @@ class HomeController extends Controller
 
     public function upload(Request $request)
     {
-        $result = uploadPicture('avatar_' . Auth::user()->username, $request->file('picture'),false);
+        $result = uploadPicture('avatar_'.Auth::user()->username, $request->file('avatar'),false);
         return response()->json([
             'success' => $result,
             'message' => $result ? 'success' : "fail"

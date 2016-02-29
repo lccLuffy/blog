@@ -39,12 +39,20 @@ Route::group(['middleware' => ['web']], function () {
 
     Route::resource('/post', 'PostController');
 
-    Route::get('user/{user}', ['uses' => 'UserController@index', 'as' => 'user.index']);
 
+    /**
+     * 用户
+     */
+    Route::get('user/{user}', ['uses' => 'UserController@index', 'as' => 'user.index']);
+    Route::post('user/uploadAvatar', ['uses' => 'UserController@uploadAvatar', 'as' => 'user.uploadAvatar']);
+
+
+    /**
+     * 漫画
+     */
     Route::get('comic/{ClassifyId}', 'ComicController@index');
     Route::get('chapter/{id}/{title}', 'ComicController@chapter');
     Route::get('images/{id}/{title}', 'ComicController@images');
-
     Route::get('onepiece/parse', 'ComicController@onepieceParse');
 });
 
