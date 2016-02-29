@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddViewCountColumToPosts extends Migration
+class CreateVisitorRegistry extends Migration
 {
     /**
      * Run the migrations.
@@ -12,8 +12,11 @@ class AddViewCountColumToPosts extends Migration
      */
     public function up()
     {
-        Schema::table('posts', function (Blueprint $table) {
-            $table->integer('view_count')->default(0)->index();
+        Schema::create('visitor_registry', function (Blueprint $table) {
+            $table->increments('id');
+            $table->string('ip',32);
+            $table->integer('post_id')->unsigned()->index();
+            $table->timestamps();
         });
     }
 
@@ -24,8 +27,6 @@ class AddViewCountColumToPosts extends Migration
      */
     public function down()
     {
-        Schema::table('posts', function (Blueprint $table) {
-            $table->dropColumn('view_count');
-        });
+        Schema::drop('visitor_registry');
     }
 }

@@ -37,11 +37,9 @@
                     正在上传...
                 </span>
             </div>
-            <button class="btn btn-info" type="submit">确定</button>
         </div>
 
     </form>
-
 
 
     <div class="modal fade" id="cropper-preview">
@@ -52,8 +50,9 @@
                                 aria-hidden="true">&times;</span></button>
                     <h4 class="modal-title">裁剪图片</h4>
                 </div>
-                <div class="modal-body" style="height:500px;">
-                    <div class="js-img"></div>
+                <div class="modal-body" id="modal_body" style="height:500px;">
+                    <div id="image_wrapper">
+                    </div>
                 </div>
                 <div class="modal-footer">
                     <p>
@@ -80,102 +79,72 @@
     <script src="{{ asset('js/uploader/jquery.Jcrop.min.js') }}"></script>
 
 
-
-
-
     <script>
 
         var avatar = document.getElementById('avatar');
 
         FileAPI.event.on(avatar, 'change', function (evt) {
             console.log('change')
-            var file = FileAPI.getFiles(evt)[0]; // Retrieve file list
-            console.log(file)
-            $('#cropper-preview').modal('show')
-            $('.js-img').cropper({
-                file: file,
-                aspectRatio: 1,
-                onSelect: function (coords) {
-                    $('#upload_avatar').fileapi('crop', file, coords);
-                }
-            })
+            var files = FileAPI.getFiles(evt); // Retrieve file list
+
+            FileAPI.filterFiles(files, function (file, info) {
+                        if (!/^image/.test(file.type)) {
+                            alert('图片格式不正确');
+                            return false;
+                        }
+                        else if (file.size > 500 * FileAPI.KB) {
+                            alert('图片必须小于500K');
+                            return false;
+                        }
+                        return true;
+                    },
+                    function (files, rejected) {
+                        var file = files[0]
+                        $('#cropper-preview').modal('show')
+                        $('#image_wrapper').cropper({
+                            file:file,
+                            bgColor: '#fff',
+                            /*maxSize: [$('#modal_body').width()-40, $(window).height()-100],*/
+                            minSize: [100, 100],
+                            selection: '90%',
+                            aspectRatio: 1,
+                            onSelect: function (coords){
+                                $('#image_wrapper').fileapi('crop', file, coords);
+                            }
+
+                        })
+
+
+                    });
 
         });
 
+        /*  $(document).ready(function () {
+         var options = {
+         beforeSubmit: showRequest,
+         success: showResponse,
+         dataType: 'json'
+         };
+         $('#avatar').on('change', function () {
 
-        /*$('#cropper-preview').on('click', '.js-upload', function (){
-         $('#upload_avatar').fileapi('upload');
-         $('#cropper-preview').modal('hide');
+         /!*$('#message').html('正在上传...');*!/
+         /!*$('#avatar_upload').ajaxForm(options).submit();*!/
          });
+         function showRequest() {
+         return true;
+         }
 
-         $('#upload_avatar').fileapi({
-         url: "http://www.baidu.com",
-         accept: 'image/!*',
-         imageSize: {minWidth: 100, minHeight: 100},
-         elements: {
-         active: {show: '.js-upload', hide: '#upload_avatar'},
-         preview: {
-         el: '.js-preview',
-         width: 96,
-         height: 96
-         },
-         },
-         onSelect: function (evt, ui) {
-         var file = ui.all[0];
-         if (file) {
-         $('#cropper-preview').modal('show').on('shown.bs.modal', function () {
-         $('.js-img').cropper({
-         file: file,
-         bgColor: '#fff',
-         maxSize: [$('#cropper-preview .modal-body').width() - 40, $(window).height() - 100],
-         minSize: [100, 100],
-         selection: '90%',
-         aspectRatio: 1,
-         onSelect: function (coords) {
-         $('#upload_avatar').fileapi('crop', file, coords);
+         function showResponse(response) {
+         console.log(response)
+         if (response.success) {
+         $('#message').html('上传成功');
          }
-         });
-         });
-         }
-         },
-         onComplete: function(evt, xhr)
-         {
-         try {
-         var result = FileAPI.parseJSON(xhr.xhr.responseText);
-         $('#avatar-hidden').attr("value",result.images.filename);
-         } catch (er){
-         FileAPI.log('PARSE ERROR:', er.message);
+         else {
+         $('#message').html(response.message);
          }
          }
+
          })*/
-
-
-        $(document).ready(function () {
-            var options = {
-                beforeSubmit: showRequest,
-                success: showResponse,
-                dataType: 'json'
-            };
-            $('#avatar').on('change', function () {
-
-                /*$('#message').html('正在上传...');*/
-                /*$('#avatar_upload').ajaxForm(options).submit();*/
-            });
-            function showRequest() {
-                return true;
-            }
-
-            function showResponse(response) {
-                console.log(response)
-                if (response.success) {
-                    $('#message').html('上传成功');
-                }
-                else {
-                    $('#message').html(response.message);
-                }
-            }
-
-        })
     </script>
 
 @endsection

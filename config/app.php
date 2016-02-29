@@ -149,7 +149,6 @@ return [
         Illuminate\View\ViewServiceProvider::class,
         zgldh\QiniuStorage\QiniuFilesystemServiceProvider::class,
         Yangqi\Htmldom\HtmldomServiceProvider::class,
-
         /*
          * Application Service Providers...
          */
