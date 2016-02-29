@@ -6,7 +6,6 @@ use App\Http\Requests;
 use App\Http\Requests\PostRequest;
 use App\Post;
 use Carbon\Carbon;
-use EndaEditor;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Hash;
@@ -62,13 +61,13 @@ class PostController extends Controller
     /**
      * Display the specified resource.
      *
+     * @param Request $request
      * @param Post $post
      * @return \Illuminate\Http\Response
      */
-    public function show(Post $post)
+    public function show(Request $request,Post $post)
     {
-
-        $post->increment('view_count',1);
+        $post->checkIP($request->ip());
         return view('post.show',compact('post'));
     }
 

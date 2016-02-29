@@ -4,9 +4,11 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\DB;
 
 /**
  * @property mixed user_id
+ * @property mixed view_count
  */
 class Post extends Model
 {
@@ -49,5 +51,27 @@ class Post extends Model
             $tagIds[] = $t->id;
         }
         $this->tags()->sync($tagIds);
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function visitorRegistries()
+    {
+        return $this->hasMany('App\VisitorRegistry');
+    }
+
+    /**
+     * 查看此IP是否查看过次文章，没有的话记录加1，有的话什么也不执行
+     * @param $ip
+     */
+    public function checkIP($ip)
+    {
+        if($this->visitorRegistries()->where('ip',$ip)->count() == 0)
+        {
+            $this->visitorRegistries()->save(VisitorRegistry::create(['ip'=>$ip]));
+            DB::table('posts')->where('id',$this->id)->increment('view_count');
+            ++$this->view_count;
+        }
     }
 }

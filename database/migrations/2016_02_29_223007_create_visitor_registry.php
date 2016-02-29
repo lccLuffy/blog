@@ -12,7 +12,7 @@ class CreateVisitorRegistry extends Migration
      */
     public function up()
     {
-        Schema::create('visitor_registry', function (Blueprint $table) {
+        Schema::create('visitor_registries', function (Blueprint $table) {
             $table->increments('id');
             $table->string('ip',32);
             $table->integer('post_id')->unsigned()->index();
