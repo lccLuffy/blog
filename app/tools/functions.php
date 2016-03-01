@@ -68,3 +68,30 @@ function uploadPicture($pictureName, $file, $getUrl = true)
     }
     return false;
 }
+
+/**
+ * {#202 ▼
+ * +"code": 0
+ * +"data": {#203 ▼
+ * +"country": "中国"
+ * +"country_id": "CN"
+ * +"area": "西南"
+ * +"area_id": "500000"
+ * +"region": "四川省"
+ * +"region_id": "510000"
+ * +"city": "成都市"
+ * +"city_id": "510100"
+ * +"county": ""
+ * +"county_id": "-1"
+ * +"isp": "教育网"
+ * +"isp_id": "100027"
+ * +"ip": "202.115.13.157"
+ * }
+ * }
+ * @param $ip
+ * @return mixed
+ */
+function ipLocation($ip)
+{
+    return json_decode(file_get_contents('http://ip.taobao.com/service/getIpInfo.php?ip=' . $ip));
+}

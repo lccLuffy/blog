@@ -11,8 +11,6 @@
 |
 */
 
-use App\Tag;
-
 
 Route::group(['prefix' => 'api'], function () {
 
@@ -33,16 +31,26 @@ Route::group(['prefix' => 'api'], function () {
 
 Route::group(['middleware' => ['web']], function () {
 
+    /**
+     * 网站
+     */
+    Route::get('/', 'HomeController@index');
+
     Route::get('/welcome', 'HomeController@welcome');
 
     Route::post('upload', 'PostController@uploadPicture');
 
+
+    /**
+     * 文章
+     */
     Route::resource('/post', 'PostController');
 
 
     /**
      * 用户
      */
+    Route::auth();
     Route::get('user/{user}', ['uses' => 'UserController@index', 'as' => 'user.index']);
     Route::post('user/uploadAvatar', ['uses' => 'UserController@uploadAvatar', 'as' => 'user.uploadAvatar']);
 
@@ -55,6 +63,12 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('images/{id}/{title}', 'ComicController@images');
     Route::get('onepiece/parse', 'ComicController@onepieceParse');
 
+
+
+});
+
+Route::group(['middleware' => ['web','auth']], function () {
+
     /**
      * Admin
      */
@@ -65,11 +79,4 @@ Route::group(['middleware' => ['web']], function () {
         Route::get('post/{post}', ['uses'=>'AdminController@post','as'=>'admin.post']);
     });
 
-});
-
-Route::group(['middleware' => 'web'], function () {
-    Route::auth();
-
-    Route::get('/', 'HomeController@index');
-    Route::post('/', 'HomeController@upload');
 });
