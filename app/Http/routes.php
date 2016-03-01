@@ -54,6 +54,17 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('chapter/{id}/{title}', 'ComicController@chapter');
     Route::get('images/{id}/{title}', 'ComicController@images');
     Route::get('onepiece/parse', 'ComicController@onepieceParse');
+
+    /**
+     * Admin
+     */
+    Route::group(['prefix' => 'admin'], function () {
+        Route::get('/', ['uses'=>'AdminController@index','as'=>'admin.index']);
+        Route::get('users', ['uses'=>'AdminController@users','as'=>'admin.users']);
+        Route::get('posts', ['uses'=>'AdminController@posts','as'=>'admin.posts']);
+        Route::get('post/{post}', ['uses'=>'AdminController@post','as'=>'admin.post']);
+    });
+
 });
 
 Route::group(['middleware' => 'web'], function () {

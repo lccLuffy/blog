@@ -47,5 +47,8 @@
     <orderEntry type="library" name="share" level="application" />
     <orderEntry type="library" name="select2" level="application" />
     <orderEntry type="library" name="jquery.form" level="application" />
+    <orderEntry type="library" name="jquery.dataTables" level="application" />
+    <orderEntry type="library" name="jquery" level="application" />
+    <orderEntry type="library" name="bootstrap" level="application" />
   </component>
 </module>
