@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class VisitorRegistry extends Model
 {
-    protected $fillable = ['ip'];
+    protected $fillable = ['ip','clicks'];
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo

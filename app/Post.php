@@ -67,11 +67,16 @@ class Post extends Model
      */
     public function checkIP($ip)
     {
-        if($this->visitorRegistries()->where('ip',$ip)->count() == 0)
+        $visitor = $this->visitorRegistries()->where('ip',$ip)->first();
+        if(is_null($visitor))
         {
-            $this->visitorRegistries()->save(VisitorRegistry::create(['ip'=>$ip]));
+            $this->visitorRegistries()->save(VisitorRegistry::create(['ip'=>$ip,'clicks'=>1]));
             DB::table('posts')->where('id',$this->id)->increment('view_count');
             ++$this->view_count;
+        }
+        else
+        {
+            $visitor->increment('clicks');
         }
     }
 }
