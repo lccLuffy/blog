@@ -16,6 +16,7 @@ class CreateVisitorRegistry extends Migration
             $table->increments('id');
             $table->string('ip',32);
             $table->integer('post_id')->unsigned()->index();
+            $table->integer('clicks')->default(0);
             $table->timestamps();
         });
     }
@@ -27,6 +28,6 @@ class CreateVisitorRegistry extends Migration
      */
     public function down()
     {
-        Schema::drop('visitor_registry');
+        Schema::drop('visitor_registries');
     }
 }

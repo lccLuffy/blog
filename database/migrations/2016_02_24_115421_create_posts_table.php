@@ -18,6 +18,8 @@ class CreatePostsTable extends Migration
             $table->text('title');
             $table->longText('content_html');
             $table->string('status', 20);
+            $table->integer('view_count')->default(0);
+            $table->boolean('is_draft')->default(false);
             $table->softDeletes();
             $table->timestamps();
 

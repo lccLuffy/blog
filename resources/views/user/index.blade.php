@@ -5,7 +5,7 @@
 @section('content')
     <div class="jumbotron">
         <div class="text-center">
-            <img src="{{ $user->avatar ? $user->avatar : 'http://localhost:8000/images/image.png' }}"
+            <img src="{{ $user->avatar ? $user->avatar : asset('images/image.png') }}"
                  class="img-circle img-thumbnail" style="width: 128px;">
             <p class="lead">{{ $user->username }}</p>
             <p>
