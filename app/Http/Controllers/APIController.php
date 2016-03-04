@@ -10,6 +10,6 @@ class APIController extends Controller
 
     public function tags()
     {
-        return response()->json(Tag::lists('name'));
+        return response()->json(Tag::all('name'));
     }
 }
