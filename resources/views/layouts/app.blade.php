@@ -37,7 +37,7 @@
 
 
             <a class="navbar-brand" href="{{ url('/') }}">
-                <img src="{{ defaultAvatar() }}">
+                lcc_luffy
             </a>
         </div>
 
