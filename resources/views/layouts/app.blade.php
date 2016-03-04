@@ -27,7 +27,6 @@
     <div class="container">
         <div class="navbar-header">
 
-            <!-- Collapsed Hamburger -->
             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
                     data-target="#app-navbar-collapse">
                 <span class="sr-only">Toggle Navigation</span>
@@ -36,9 +35,9 @@
                 <span class="icon-bar"></span>
             </button>
 
-            <!-- Branding Image -->
+
             <a class="navbar-brand" href="{{ url('/') }}">
-                lcc_luffy
+                <img src="{{ defaultAvatar() }}">
             </a>
         </div>
 
@@ -49,11 +48,22 @@
                 <li><a href="{{ route('post.create') }}">发布</a></li>
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
-                       aria-expanded="false">漫画<span class="caret"></span></a>
+                       aria-expanded="false">分类<span class="caret"></span></a>
                     <ul class="dropdown-menu" role="menu">
-                        <li><a href="{{ url('comic',0) }}"></i>热血</a></li>
-                        <li><a href="{{ url('comic',2) }}"></i>同人</a></li>
-                        <li><a href="{{ url('comic',3) }}"></i>鼠绘</a></li>
+                        @forelse($categories as $category)
+                            <li><a href="{{ url('comic',0) }}">{{ $category->name }}</a></li>
+                        @empty
+                            <li>无分类</li>
+                        @endforelse
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                       aria-expanded="false">漫画<span class="caret"></span></a>
+                    <ul class="dropdown-menu list-group" role="menu">
+                        <li><a href="{{ url('comic',0) }}">热血</a></li>
+                        <li><a href="{{ url('comic',2) }}">同人</a></li>
+                        <li><a href="{{ url('comic',3) }}">鼠绘</a></li>
                         <li><a href="{{ url('onepiece/parse') }}"></i>海贼分析</a></li>
                     </ul>
                 </li>
@@ -81,7 +91,7 @@
     </div>
 </nav>
 <div class="container">
-@yield('content')
+    @yield('content')
 </div>
 <!-- JavaScripts -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
