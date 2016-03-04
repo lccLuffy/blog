@@ -15,6 +15,7 @@
 Route::group(['prefix' => 'api','middleware'=>'api'], function () {
 
     Route::get('tags', 'APIController@tags');
+    Route::get('posts', 'APIController@posts');
 
 });
 
@@ -35,6 +36,7 @@ Route::group(['middleware' => ['web']], function () {
      * 网站
      */
     Route::get('/', 'HomeController@index');
+    Route::get('api', 'APIController@index');
 
     Route::get('/welcome', 'HomeController@welcome');
 
