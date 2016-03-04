@@ -48,7 +48,7 @@ function fetchDescription($string, $length, $suffix = '...')
  */
 function defaultAvatar()
 {
-    return 'http://localhost:8000/images/image.png';
+    return asset('images/image.png');
 }
 
 /**

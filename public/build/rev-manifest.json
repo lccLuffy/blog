@@ -1,5 +1,7 @@
 {
-  "css/app.css": "css/app-485a76ec8c.css",
-  "css/simditor/app.css": "css/simditor/app-7ab59f31e3.css",
-  "js/simditor.js": "js/simditor-91b20f70cc.js"
+  "css/app.css": "css/app-c7a7e83eaa.css",
+  "css/simditor/app.css": "css/simditor/app-ba6cb75f6a.css",
+  "css/web/theme.css": "css/web/theme-972693db8d.css",
+  "js/simditor.js": "js/simditor-7fad82f5d8.js",
+  "js/web/theme.js": "js/web/theme-23cdd1cb7c.js"
 }

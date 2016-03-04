@@ -14,11 +14,12 @@
 
 
     <!-- Fonts -->
-    <link href="//cdn.bootcss.com/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href="http://cdn.bootcss.com/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet">
     <link href="http://fonts.googleapis.com/css?family=Lato:100,300,400,700" rel='stylesheet' type='text/css'>
 
     <!-- Styles -->
     <link href="{{ elixir('css/app.css') }}" rel="stylesheet">
+    {{--<link href="{{ elixir('css/web/theme.css') }}" rel="stylesheet">--}}
     @yield('css')
 </head>
 <body id="app-layout">
@@ -80,11 +81,12 @@
     </div>
 </nav>
 <div class="container">
-    @yield('content')
+@yield('content')
 </div>
 <!-- JavaScripts -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+{{--<script src="{{ elixir('js/web/theme.js') }}"></script>--}}
 @yield('scripts')
 </body>
 </html>

@@ -5,7 +5,7 @@
 @section('content')
     <div class="jumbotron">
         <div class="text-center">
-            <img src="{{ $user->avatar ? $user->avatar : asset('images/image.png') }}"
+            <img src="{{ $user->avatar ? $user->avatar : defaultAvatar() }}"
                  class="img-circle img-thumbnail" style="width: 128px;">
             <p class="lead">{{ $user->username }}</p>
             <p>
@@ -81,70 +81,63 @@
 
     <script>
 
-        var avatar = document.getElementById('avatar');
+        /*var avatar = document.getElementById('avatar');
 
-        FileAPI.event.on(avatar, 'change', function (evt) {
-            console.log('change')
-            var files = FileAPI.getFiles(evt); // Retrieve file list
+         FileAPI.event.on(avatar, 'change', function (evt) {
+         console.log('change')
+         var files = FileAPI.getFiles(evt); // Retrieve file list
 
-            FileAPI.filterFiles(files, function (file, info) {
-                        if (!/^image/.test(file.type)) {
-                            alert('图片格式不正确');
-                            return false;
-                        }
-                        else if (file.size > 500 * FileAPI.KB) {
-                            alert('图片必须小于500K');
-                            return false;
-                        }
-                        return true;
-                    },
-                    function (files, rejected) {
-                        var file = files[0]
-                        $('#cropper-preview').modal('show')
-                        $('#image_wrapper').cropper({
-                            file:file,
-                            bgColor: '#fff',
-                            /*maxSize: [$('#modal_body').width()-40, $(window).height()-100],*/
-                            minSize: [100, 100],
-                            selection: '90%',
-                            aspectRatio: 1,
-                            onSelect: function (coords){
-                                $('#image_wrapper').fileapi('crop', file, coords);
-                            }
-
-                        })
-
-
-                    });
-
-        });
-
-        /*  $(document).ready(function () {
-         var options = {
-         beforeSubmit: showRequest,
-         success: showResponse,
-         dataType: 'json'
-         };
-         $('#avatar').on('change', function () {
-
-         /!*$('#message').html('正在上传...');*!/
-         /!*$('#avatar_upload').ajaxForm(options).submit();*!/
-         });
-         function showRequest() {
+         FileAPI.filterFiles(files, function (file, info) {
+         if (!/^image/.test(file.type)) {
+         alert('图片格式不正确');
+         return false;
+         }
+         else if (file.size > 500 * FileAPI.KB) {
+         alert('图片必须小于500K');
+         return false;
+         }
          return true;
-         }
+         },
+         function (files, rejected) {
+         var file = files[0]
+         $('#cropper-preview').modal('show')
+         $('#image_wrapper').cropper({
+         file:file,
+         bgColor: '#fff',
+         aspectRatio: 1,
 
-         function showResponse(response) {
-         console.log(response)
-         if (response.success) {
-         $('#message').html('上传成功');
-         }
-         else {
-         $('#message').html(response.message);
-         }
-         }
 
-         })*/
+         })
+
+
+         });
+
+         });*/
+
+        $(document).ready(function () {
+            var options = {
+                beforeSubmit: showRequest,
+                success: showResponse,
+                dataType: 'json'
+            };
+            $('#avatar').on('change', function () {
+                $('#message').html('正在上传...');
+                $('#avatar_upload').ajaxForm(options).submit();
+            });
+            function showRequest() {
+                return true;
+            }
+
+            function showResponse(response) {
+                if (response.success) {
+                    $('#message').html('上传成功');
+                }
+                else {
+                    $('#message').html(response.message);
+                }
+            }
+
+        })
     </script>
 
 @endsection

@@ -31,6 +31,9 @@ class UserController extends Controller
     }
     public function uploadAvatar(Request $request)
     {
+        $this->validate($request,[
+            'avatar'=>'required|image'
+        ]);
         $message = '上传失败';
         try{
             $result = uploadPicture('blog_avatar_'.Auth::user()->username, $request->file('avatar'));
