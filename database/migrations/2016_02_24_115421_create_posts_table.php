@@ -17,6 +17,8 @@ class CreatePostsTable extends Migration
             $table->integer('user_id')->unsigned()->index();
             $table->text('title');
             $table->longText('content_html');
+            $table->longText('content_markdown');
+            $table->integer('category_id')->unsigned()->index();
             $table->string('status', 20);
             $table->integer('view_count')->default(0);
             $table->boolean('is_draft')->default(false);
