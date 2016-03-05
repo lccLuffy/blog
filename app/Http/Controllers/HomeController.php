@@ -31,6 +31,5 @@ class HomeController extends Controller
     public function newToken()
     {
         $token = JWTAuth::fromUser(User::first());
-        dd($token);
     }
 }
