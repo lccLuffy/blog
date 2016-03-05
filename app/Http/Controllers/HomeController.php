@@ -1,9 +1,8 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\User;
-use Dingo\Api\Routing\Helpers;
 use JWTAuth;
+
 class HomeController extends Controller
 {
     /**
@@ -23,7 +22,6 @@ class HomeController extends Controller
      */
     public function index()
     {
-        dd(JWTAuth::fromUser(User::first()));
         return view('index');
     }
 }
