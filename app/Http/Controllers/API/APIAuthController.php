@@ -9,7 +9,12 @@ use App\Http\Controllers\Controller;
 
 class ApiAuthController extends Controller
 {
+
     public function login(Request $request)
+    {
+
+    }
+    public function register(Request $request)
     {
 
     }

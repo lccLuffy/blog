@@ -14,10 +14,11 @@
 
 $api = app('Dingo\Api\Routing\Router');
 
-$api->version('v1',['middleware' => 'api.auth'], function ($api) {
+$api->version('v1',['middleware' => ['api.throttle']], function ($api) {
 
-    $api->get('tags', 'App\Http\Controllers\API\APITagController@tags');
-    $api->get('tag/{tag}', 'App\Http\Controllers\API\APITagController@show');
+    $api->resource('tag', 'App\Http\Controllers\API\APITagController',['except' => ['show','update']]);
+
+    $api->resource('post','App\Http\Controllers\API\APIPostController');
 });
 
 
