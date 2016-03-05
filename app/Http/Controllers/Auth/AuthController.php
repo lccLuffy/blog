@@ -2,14 +2,12 @@
 
 namespace App\Http\Controllers\Auth;
 
-use Illuminate\Http\Request;
-use App\User;
-use Tymon\JWTAuth\Exceptions\JWTException;
-use Validator;
-use JWTAuth;
 use App\Http\Controllers\Controller;
-use Illuminate\Foundation\Auth\ThrottlesLogins;
+use App\User;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
+use Illuminate\Foundation\Auth\ThrottlesLogins;
+use JWTAuth;
+use Validator;
 
 class AuthController extends Controller
 {

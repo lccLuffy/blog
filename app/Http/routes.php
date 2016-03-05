@@ -12,11 +12,11 @@
 */
 
 
-Route::group(['prefix' => 'api','middleware'=>'api','namespace'=>'API'], function () {
+Route::group(['prefix' => 'api', 'middleware' => 'api'], function () {
 
-    Route::get('tags', 'APIController@tags');
-    Route::get('posts', 'APIController@posts');
-    Route::post('login', 'APIAuthController@login');
+    Route::get('tags', 'API\APITagController@tags');
+    Route::get('posts', 'API\APITagController@posts');
+    Route::post('login', 'API\APIAuthController@login');
 
 });
 
@@ -67,7 +67,6 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('onepiece/parse', 'ComicController@onepieceParse');
 
 
-
 });
 
 
@@ -75,8 +74,8 @@ Route::group(['middleware' => ['web']], function () {
  * Admin
  */
 Route::group(['prefix' => 'admin'], function () {
-    Route::get('/', ['uses'=>'AdminController@index','as'=>'admin.index']);
-    Route::get('users', ['uses'=>'AdminController@users','as'=>'admin.users']);
-    Route::get('posts', ['uses'=>'AdminController@posts','as'=>'admin.posts']);
-    Route::get('post/{post}', ['uses'=>'AdminController@post','as'=>'admin.post']);
+    Route::get('/', ['uses' => 'AdminController@index', 'as' => 'admin.index']);
+    Route::get('users', ['uses' => 'AdminController@users', 'as' => 'admin.users']);
+    Route::get('posts', ['uses' => 'AdminController@posts', 'as' => 'admin.posts']);
+    Route::get('post/{post}', ['uses' => 'AdminController@post', 'as' => 'admin.post']);
 });
