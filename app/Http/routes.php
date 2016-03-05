@@ -12,15 +12,13 @@
 */
 
 
-Route::group(['prefix' => 'api','middleware'=>'api'], function () {
+Route::group(['prefix' => 'api','middleware'=>'api','namespace'=>'API'], function () {
 
     Route::get('tags', 'APIController@tags');
     Route::get('posts', 'APIController@posts');
     Route::post('login', 'APIAuthController@login');
 
 });
-
-Route::get('l', 'Auth\AuthController@authenticate');
 
 /*
 |--------------------------------------------------------------------------
