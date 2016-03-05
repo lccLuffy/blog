@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
+use App\User;
+use JWTAuth;
 
 class HomeController extends Controller
 {
@@ -17,6 +17,7 @@ class HomeController extends Controller
         return view('welcome');
     }
 
+
     /**
      * Show the application dashboard.
      *
@@ -25,5 +26,11 @@ class HomeController extends Controller
     public function index()
     {
         return view('index');
+    }
+
+    public function newToken()
+    {
+        $token = JWTAuth::fromUser(User::first());
+        dd($token);
     }
 }
