@@ -1,7 +1,85 @@
 @extends('layouts.app')
 @section('css')
     <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.2-rc.1/css/select2.min.css" rel="stylesheet"/>
-    <link href="{{ elixir('css/simditor/app.css') }}" rel="stylesheet">
+    <style>
+        textarea {
+            -moz-box-sizing: border-box;
+            -webkit-font-smoothing: subpixel-antialiased;
+            -webkit-box-sizing: border-box;
+            background: #fff;
+            border: none;
+            box-sizing: border-box;
+            color: #333;
+            font-family: 'Roboto Mono', monospace;
+            font-size: 16px;
+            height: 100%;
+            line-height: 28px;
+            margin: 0;
+            padding: 20px;
+            resize: none;
+            vertical-align: top;
+            width: 100%;
+        }
+
+        textarea:focus {
+            outline: none;
+        }
+
+        button {
+            background: #fff;
+            border: none;
+            color: #379;
+            cursor: pointer;
+            line-height: 24px;
+            text-align: left;
+            padding: 20px;
+            width: 100%;
+        }
+
+        div.title {
+            background: #222;
+            color: #777;
+            padding: 20px;
+            position: absolute;
+        }
+
+        div.title strong {
+            color: #fff;
+            font-weight: normal;
+        }
+
+        div.output {
+            background: #222;
+            bottom: 289px;
+            color: #fff;
+            overflow: auto;
+            padding: 20px;
+            position: absolute;
+            top: 128px;
+        }
+
+        div.time {
+            background: #222;
+            bottom: 225px;
+            color: #777;
+            position: absolute;
+            padding: 20px;
+        }
+
+        div.time strong {
+            color: #fff;
+            font-weight: normal;
+        }
+
+        div.output-source {
+            background: #222;
+            bottom: 0;
+            height: 185px;
+            overflow: auto;
+            padding: 20px;
+            position: absolute;
+        }
+    </style>
 @endsection
 @section('content')
 
@@ -19,42 +97,18 @@
 @endsection
 @section('scripts')
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.2-rc.1/js/select2.min.js"></script>
-    <script src="{{ elixir('js/simditor.js') }}"></script>
     <script>
-
-
         $.getJSON("{{url('api/tags')}}", function (json) {
+            var tags =new Array()
+            $.each(json,function(idx,item){
+                tags[idx] = item.name;
+            })
             $('#tag_select').select2({
                 tags: true,
                 maximumSelectionLength: 5,
-                data:json
+                data:tags
             });
 
-        });
-
-        var editor/*, mobileToolbar*/, toolbar;
-
-        toolbar = ['title', 'bold', 'italic', 'underline', 'strikethrough', 'fontScale', 'color',
-            '|', 'ol', 'ul', 'blockquote', 'code', /*'table', */'|', 'link', 'image', 'hr', '|', 'indent', 'outdent', 'alignment', '|', 'html'];
-        /*mobileToolbar = ["bold", "underline", "strikethrough", "color", "ul", "ol"];
-        if (false) {
-            toolbar = mobileToolbar;
-        }*/
-        editor = new Simditor({
-            textarea: $('#editor'),
-            toolbar: toolbar,
-            pasteImage: true,
-            cleanPaste: true,
-            defaultImage: "{{ asset('images/image.png') }}",
-            upload: {
-                url: 'http://localhost:8000/upload', //文件上传的接口地址
-                fileKey: 'picture', //服务器端获取文件数据的参数名
-                params: {
-                    '_token': "{{ csrf_token() }}"
-                },
-                connectionCount: 3,
-                leaveConfirm: '正在上传文件'
-            }
         });
     </script>
 @endsection

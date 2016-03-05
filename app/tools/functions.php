@@ -95,3 +95,10 @@ function ipLocation($ip)
 {
     return json_decode(file_get_contents('http://ip.taobao.com/service/getIpInfo.php?ip=' . $ip));
 }
+
+
+
+function markdown2Html($raw)
+{
+    return Parsedown::instance()->text($raw);
+}

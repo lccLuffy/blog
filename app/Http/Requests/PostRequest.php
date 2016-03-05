@@ -26,7 +26,7 @@ class PostRequest extends Request
     {
         return [
             'title'=>'required|max:255',
-            'content_html'=>'required'
+            'content_markdown'=>'required'
         ];
     }
 
@@ -34,7 +34,8 @@ class PostRequest extends Request
     {
         return [
             'title'=>$this['title'],
-            'content_html'=>$this['content_html'],
+            'content_markdown'=>$this['content_markdown'],
+            'content_html' => markdown2Html($this['content_markdown']),
             'user_id'=>Auth::id(),
         ];
     }
@@ -42,7 +43,8 @@ class PostRequest extends Request
     {
         return [
             'title'=>$this['title'],
-            'content_html'=>$this['content_html'],
+            'content_markdown'=>$this['content_markdown'],
+            'content_html' => markdown2Html($this['content_markdown']),
         ];
     }
 }

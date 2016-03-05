@@ -3,8 +3,8 @@
 @section('css')
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.10/css/share.min.css">
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.2.0/styles/default.min.css">
-    <link href="{{ elixir('css/simditor/app.css') }}" rel="stylesheet">
-    <link rel="stylesheet" href="http://localhost:8000/css/code/monokai-sublime.css">
+    <link rel="stylesheet" href="{{ asset('css/code/monokai-sublime.css') }}">
+
 @endsection
 @section('description')
     {{ $post->title }}

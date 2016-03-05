@@ -18,6 +18,7 @@ class Post extends Model
         'title',
         'content_raw',
         'content_html',
+        'content_markdown',
         'user_id',
     ];
 

@@ -10,8 +10,8 @@
 <div class="form-group">
     <div class="input-group col-md-12">
         <div class="editor">
-            <textarea id='editor' class="form-control" name="content_html"
-                      placeholder="内容">{{ $post->content_html or old('content_html') }}</textarea>
+            <textarea id='editor' class="form-control" name="content_markdown" rows="30"
+                      placeholder="内容">{{ $post->content_markdown or old('content_markdown') }}</textarea>
         </div>
     </div>
 </div>

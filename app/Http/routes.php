@@ -12,13 +12,22 @@
 */
 
 
-Route::group(['prefix' => 'api', 'middleware' => 'api'], function () {
+$api = app('Dingo\Api\Routing\Router');
+
+$api->version('v1',['middleware' => 'api.auth'], function ($api) {
+
+    $api->get('tags', 'App\Http\Controllers\API\APITagController@tags');
+    $api->get('tag/{tag}', 'App\Http\Controllers\API\APITagController@show');
+});
+
+
+/*Route::group(['prefix' => 'api', 'middleware' => 'api'], function () {
 
     Route::get('tags', 'API\APITagController@tags');
-    Route::get('posts', 'API\APITagController@posts');
+    Route::get('posts', 'API\APIPostController@posts');
     Route::post('login', 'API\APIAuthController@login');
 
-});
+});*/
 
 /*
 |--------------------------------------------------------------------------
@@ -37,7 +46,7 @@ Route::group(['middleware' => ['web']], function () {
      * 网站
      */
     Route::get('/', 'HomeController@index');
-    Route::get('api', 'APIController@index');
+    Route::get('api', 'API\APITagController@index');
 
     Route::get('/welcome', 'HomeController@welcome');
 

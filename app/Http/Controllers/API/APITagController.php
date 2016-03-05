@@ -4,7 +4,6 @@ namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests;
-use App\Post;
 use App\Tag;
 
 class APITagController extends Controller
@@ -23,14 +22,12 @@ class APITagController extends Controller
      */
     public function tags()
     {
-        return response()->json(Tag::all('name'));
+        return Tag::all();
     }
 
-    /**
-     * @return \Illuminate\Http\JsonResponse
-     */
-    public function posts()
+    public function show(Tag $tag)
     {
-        return response()->json(Post::paginate(5));
+       return $tag;
     }
+
 }
