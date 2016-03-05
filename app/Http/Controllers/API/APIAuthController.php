@@ -25,7 +25,7 @@ class APIAuthController extends Controller
         $rules = [
             'username' => 'required|max:16|min:3|unique:users',
             'email' => 'required|email|max:255|unique:users',
-            'password' => 'required|confirmed|min:6',
+            'password' => 'required|min:6',
         ];
         $validator = $this->getValidationFactory()->make($request->all(), $rules);
         if($validator->fails())
