@@ -42,7 +42,7 @@ class APIAuthController extends BaseController
         $credentials = $request->only('email', 'password');
         try {
             if (! $token = JWTAuth::attempt($credentials)) {
-                return $this->response->errorUnauthorized('email or password is wrong');
+                abort(200,'email or password is wrong');
             }
         } catch (JWTException $e) {
             return $this->response->errorUnauthorized($e->getMessage());
