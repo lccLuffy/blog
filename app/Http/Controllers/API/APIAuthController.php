@@ -2,19 +2,15 @@
 
 namespace App\Http\Controllers\API;
 
+use App\Http\Requests;
 use App\User;
 use Dingo\Api\Exception\StoreResourceFailedException;
-use Dingo\Api\Routing\Helpers;
 use Illuminate\Http\Request;
-
-use App\Http\Requests;
-use App\Http\Controllers\Controller;
 use JWTAuth;
 use Tymon\JWTAuth\Exceptions\JWTException;
 
-class APIAuthController extends Controller
+class APIAuthController extends BaseController
 {
-    use Helpers;
     /**
      * @param Request $request
      * @return array
@@ -33,7 +29,7 @@ class APIAuthController extends Controller
             throw new StoreResourceFailedException('Could not create new user.', $validator->errors());
         }
         $user = $this->create($request->all());
-        return ['success'=>true,'user'=>User::findOrFail($user->id),'token'=>JWTAuth::fromUser($user)];
+        return ['user'=>User::findOrFail($user->id),'token'=>JWTAuth::fromUser($user)];
     }
 
 

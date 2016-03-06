@@ -8,9 +8,8 @@ use App\Post;
 use App\User;
 use Dingo\Api\Routing\Helpers;
 
-class APIPostController extends Controller
+class APIPostController extends BaseController
 {
-    use Helpers;
     public function __construct()
     {
         $this->middleware('api.auth',['except' => ['index']]);

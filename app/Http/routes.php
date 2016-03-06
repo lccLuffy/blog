@@ -14,24 +14,16 @@
 
 $api = app('Dingo\Api\Routing\Router');
 
-$api->version('v1',['middleware' => ['api.throttle']], function ($api) {
+$api->version('v1', ['middleware' => 'api.throttle'], function ($api) {
 
-    $api->post('user/register','App\Http\Controllers\API\APIAuthController@register');
-    $api->post('user/login','App\Http\Controllers\API\APIAuthController@login');
+    $api->post('user/register', 'App\Http\Controllers\API\APIAuthController@register');
+    $api->post('user/login', 'App\Http\Controllers\API\APIAuthController@login');
 
-    $api->resource('tag', 'App\Http\Controllers\API\APITagController',['except' => ['show','update']]);
+    $api->resource('tag', 'App\Http\Controllers\API\APITagController', ['except' => ['show', 'update']]);
 
-    $api->resource('post','App\Http\Controllers\API\APIPostController');
+    $api->resource('post', 'App\Http\Controllers\API\APIPostController');
 });
 
-
-/*Route::group(['prefix' => 'api', 'middleware' => 'api'], function () {
-
-    Route::get('tags', 'API\APITagController@tags');
-    Route::get('posts', 'API\APIPostController@posts');
-    Route::post('login', 'API\APIAuthController@login');
-
-});*/
 
 /*
 |--------------------------------------------------------------------------
@@ -56,12 +48,10 @@ Route::group(['middleware' => ['web']], function () {
 
     Route::post('upload', 'PostController@uploadPicture');
 
-
     /**
      * 文章
      */
     Route::resource('/post', 'PostController');
-
 
     /**
      * 用户

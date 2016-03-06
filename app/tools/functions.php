@@ -97,8 +97,16 @@ function ipLocation($ip)
 }
 
 
-
+/**
+ * @param $raw
+ * @return string
+ */
 function markdown2Html($raw)
 {
     return Parsedown::instance()->text($raw);
+}
+
+function apiRoute($name,$version = 'v1')
+{
+    return app('Dingo\Api\Routing\UrlGenerator')->version($version)->route('api.'.$name);
 }

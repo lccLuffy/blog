@@ -2,15 +2,12 @@
 
 namespace App\Http\Controllers\API;
 
-use App\Http\Controllers\Controller;
 use App\Http\Requests;
 use App\Tag;
-use Dingo\Api\Routing\Helpers;
 
-class APITagController extends Controller
+class APITagController extends BaseController
 {
 
-    use Helpers;
     public function __construct()
     {
         $this->middleware('api.auth',['except' => ['index']]);
