@@ -24,10 +24,21 @@ class APIPostController extends BaseController
     {
         $page = $request->get('page', 1);
         $perPage = $request->get('perPage', 10);
-        $result = Post::orderBy('created_at', 'desc')
+        $result = Post::orderBy('posts.created_at', 'desc')
             ->skip(($page - 1) * $perPage)
+            ->join('users', 'users.id', '=', 'posts.user_id')
             ->take($perPage)
-            ->select('id', 'user_id', 'title', 'category_id', 'view_count', 'created_at')
+            ->select
+            (
+                'posts.id',
+                'posts.user_id',
+                'posts.title',
+                'posts.category_id',
+                'posts.view_count',
+                'posts.created_at',
+                'users.username',
+                'users.avatar'
+            )
             ->get()->toArray();
         return ['error' => false, 'currentPage' => $page, 'perPage' => $perPage, 'results' => $result];
     }
