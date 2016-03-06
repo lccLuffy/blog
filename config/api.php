@@ -138,7 +138,7 @@ return [
 
     'errorFormat' => [
         'error'=>true,
-        'results'=>null,
+        'results'=>'',
         'message' => ':message',
         'errors' => ':errors',
         'code' => ':code',
