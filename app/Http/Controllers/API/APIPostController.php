@@ -23,7 +23,7 @@ class APIPostController extends BaseController
     public function index(Request $request)
     {
         $page = $request->get('page', 1);
-        $perPage = $request->get('perPage', 6);
+        $perPage = $request->get('perPage', 10);
         $result = Post::orderBy('created_at', 'desc')
             ->skip(($page - 1) * $perPage)
             ->take($perPage)
