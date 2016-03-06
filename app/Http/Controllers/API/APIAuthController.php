@@ -26,7 +26,7 @@ class APIAuthController extends BaseController
         $validator = $this->getValidationFactory()->make($request->all(), $rules);
         if($validator->fails())
         {
-            throw new StoreResourceFailedException('Could not create new user.', $validator->errors());
+            abort(200,json_encode($validator->errors()));
         }
         $user = $this->create($request->all());
         return $this->wrapArray(['user'=>User::findOrFail($user->id),'token'=>JWTAuth::fromUser($user)]);
