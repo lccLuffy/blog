@@ -98,8 +98,8 @@
 @section('scripts')
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.2-rc.1/js/select2.min.js"></script>
     <script>
-        $.getJSON("{{url('api/tags')}}", function (json) {
-            var tags =new Array()
+        $.getJSON("{{url('api/tag')}}", function (json) {
+            var tags =[]
             $.each(json,function(idx,item){
                 tags[idx] = item.name;
             })
