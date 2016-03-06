@@ -17,11 +17,19 @@ class APIPostController extends BaseController
     }
 
     /**
+     * @param Request $request
      * @return \Illuminate\Http\JsonResponse
      */
-    public function index()
+    public function index(Request $request)
     {
-        return Post::all();
+        $page = $request->get('page', 1);
+        $perPage = $request->get('perPage', 6);
+        $result = Post::orderBy('created_at', 'desc')
+            ->skip(($page - 1) * $perPage)
+            ->take($perPage)
+            ->select('id', 'user_id', 'title', 'category_id', 'view_count', 'created_at')
+            ->get()->toArray();
+        return ['error' => false, 'currentPage' => $page, 'perPage' => $perPage, 'results' => $result];
     }
 
     public function store(Request $request)
@@ -42,12 +50,9 @@ class APIPostController extends BaseController
             'content_html' => markdown2Html($request['content_markdown']),
             'user_id' => $this->user()->id,
         ]);
-        if ($post)
-        {
+        if ($post) {
             return $this->wrapArray('create success', false, 'create success');
-        }
-        else
-        {
+        } else {
             return $this->wrapArray('create fail', true, 'create fail');
         }
     }
