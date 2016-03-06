@@ -40,7 +40,7 @@ class APIPostController extends BaseController
             'title' => $request['title'],
             'content_markdown' => $request['content_markdown'],
             'content_html' => markdown2Html($request['content_markdown']),
-            'user_id' => $this->auth()->id,
+            'user_id' => $this->user()->id,
         ]);
         if ($post)
         {
