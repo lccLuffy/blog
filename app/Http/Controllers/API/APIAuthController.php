@@ -45,7 +45,7 @@ class APIAuthController extends BaseController
                 abort(200,'email or password is wrong');
             }
         } catch (JWTException $e) {
-            return $this->response->errorUnauthorized($e->getMessage());
+            abort(200,'email or password is wrong');
         }
         $user = JWTAuth::toUser($token);
         return $this->wrapArray(compact('user','token'));
