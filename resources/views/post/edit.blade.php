@@ -21,7 +21,7 @@
     <script>
         $.getJSON("{{url('api/tag')}}", function (json) {
             var tags =[]
-            $.each(json,function(idx,item){
+            $.each(json.tags,function(idx,item){
                 tags[idx] = item.name;
             })
             $('#tag_select').select2({
