@@ -29,7 +29,7 @@ class APIAuthController extends BaseController
             throw new StoreResourceFailedException('Could not create new user.', $validator->errors());
         }
         $user = $this->create($request->all());
-        return ['user'=>User::findOrFail($user->id),'token'=>JWTAuth::fromUser($user)];
+        return $this->wrapArray(['user'=>User::findOrFail($user->id),'token'=>JWTAuth::fromUser($user)]);
     }
 
 
@@ -42,13 +42,13 @@ class APIAuthController extends BaseController
         $credentials = $request->only('email', 'password');
         try {
             if (! $token = JWTAuth::attempt($credentials)) {
-                return $this->response->errorUnauthorized();
+                return $this->response->errorUnauthorized('email or password is wrong');
             }
         } catch (JWTException $e) {
             return $this->response->errorUnauthorized($e->getMessage());
         }
         $user = JWTAuth::toUser($token);
-        return compact('user','token');
+        return $this->wrapArray(compact('user','token'));
     }
 
     /**

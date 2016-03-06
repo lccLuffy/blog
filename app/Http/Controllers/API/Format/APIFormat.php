@@ -62,7 +62,7 @@ class APIFormat extends Format
             $value = $this->morphToArray($value);
         });
 
-        return $this->encode($this->wrapResult($content));
+        return $this->encode($content);
     }
 
     /**

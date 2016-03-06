@@ -137,6 +137,7 @@ return [
     */
 
     'errorFormat' => [
+        'error'=>true,
         'message' => ':message',
         'errors' => ':errors',
         'code' => ':code',
@@ -201,8 +202,8 @@ return [
     'defaultFormat' => env('API_DEFAULT_FORMAT', 'json'),
 
     'formats' => [
-        'json' => Dingo\Api\Http\Response\Format\Json::class,
-        /*'json' => App\Http\Controllers\API\Format\APIFormat::class,*/
+        /*'json' => Dingo\Api\Http\Response\Format\Json::class,*/
+        'json' => App\Http\Controllers\API\Format\APIFormat::class,
     ],
 
 ];
