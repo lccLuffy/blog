@@ -13,7 +13,7 @@ class APIPostController extends BaseController
 {
     public function __construct()
     {
-        $this->middleware('api.auth', ['except' => ['index']]);
+        $this->middleware('api.auth', ['only' => ['store']]);
     }
 
     /**
@@ -66,5 +66,35 @@ class APIPostController extends BaseController
         } else {
             return $this->wrapArray('create fail', true, 'create fail');
         }
+    }
+
+    /**
+     * @param Request $request
+     * @param $user_id
+     * @return array
+     */
+    public function postsByUser(Request $request, $user_id)
+    {
+        $page = $request->get('page', 1);
+        $perPage = $request->get('perPage', 10);
+
+        $result = Post::orderBy('posts.created_at', 'desc')
+            ->where('posts.user_id',$user_id)
+            ->skip(($page - 1) * $perPage)
+            ->join('users', 'users.id', '=', 'posts.user_id')
+            ->take($perPage)
+            ->select
+            (
+                'posts.id',
+                'posts.user_id',
+                'posts.title',
+                'posts.category_id',
+                'posts.view_count',
+                'posts.created_at',
+                'users.username',
+                'users.avatar'
+            )
+            ->get()->toArray();
+        return ['error' => false, 'currentPage' => $page, 'perPage' => $perPage, 'results' => $result];
     }
 }

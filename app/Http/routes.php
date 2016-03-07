@@ -23,6 +23,8 @@ $api->version('v1', ['middleware' => 'api.throttle'], function ($api) {
 
     $api->resource('tag', 'App\Http\Controllers\API\APITagController', ['except' => ['show', 'update']]);
 
+
+    $api->get('{user_id}/posts', 'App\Http\Controllers\API\APIPostController@postsByUser');
     $api->resource('post', 'App\Http\Controllers\API\APIPostController');
 });
 
