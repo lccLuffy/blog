@@ -11,6 +11,10 @@ use Tymon\JWTAuth\Exceptions\JWTException;
 
 class APIAuthController extends BaseController
 {
+    public function __construct()
+    {
+        $this->middleware('api.auth', ['only' => ['checkToken']]);
+    }
     /**
      * @param Request $request
      * @return array
@@ -64,5 +68,10 @@ class APIAuthController extends BaseController
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
         ]);
+    }
+
+    public function checkToken()
+    {
+        return $this->wrapArray($this->user()->username.' are login');
     }
 }

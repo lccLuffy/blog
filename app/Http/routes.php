@@ -16,6 +16,8 @@ $api = app('Dingo\Api\Routing\Router');
 
 $api->version('v1', ['middleware' => 'api.throttle'], function ($api) {
 
+    $api->get('user/checkToken', 'App\Http\Controllers\API\APIAuthController@checkToken');
+
     $api->post('user/register', 'App\Http\Controllers\API\APIAuthController@register');
     $api->post('user/login', 'App\Http\Controllers\API\APIAuthController@login');
 
