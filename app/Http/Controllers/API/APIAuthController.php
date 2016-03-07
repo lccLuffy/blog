@@ -13,7 +13,7 @@ class APIAuthController extends BaseController
 {
     public function __construct()
     {
-        $this->middleware('api.auth', ['only' => ['checkToken']]);
+        $this->middleware('api.auth', ['only' => ['checkToken','uploadAvatar']]);
     }
     /**
      * @param Request $request
@@ -73,5 +73,18 @@ class APIAuthController extends BaseController
     public function checkToken()
     {
         return $this->wrapArray($this->user()->username.' are login');
+    }
+
+    /**
+     * @param Request $request
+     * @return array
+     */
+    public function uploadAvatar(Request $request)
+    {
+        $request = uploadPicture('blog_avatar_'.$this->user()->username, $request->file('avatar'));
+        if($request)
+            return $this->wrapArray("success");
+        else
+            return $this->wrapArray("fail",true);
     }
 }
