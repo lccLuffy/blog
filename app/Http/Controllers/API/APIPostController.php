@@ -13,7 +13,7 @@ class APIPostController extends BaseController
 {
     public function __construct()
     {
-        $this->middleware('api.auth', ['only' => ['store']]);
+        $this->middleware('api.auth', ['only' => ['store','uploadAvatar']]);
     }
 
     /**
@@ -96,5 +96,14 @@ class APIPostController extends BaseController
             )
             ->get()->toArray();
         return ['error' => false, 'currentPage' => $page, 'perPage' => $perPage, 'results' => $result];
+    }
+
+    public function uploadAvatar(Request $request)
+    {
+        $request = uploadPicture('blog_avatar_'.$this->user()->username, $request->file('avatar'));
+        if($request)
+            return $this->wrapArray("success");
+        else
+            return $this->wrapArray("fail",true);
     }
 }

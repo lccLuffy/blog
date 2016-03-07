@@ -20,6 +20,8 @@ $api->version('v1', ['middleware' => 'api.throttle'], function ($api) {
 
     $api->post('user/register', 'App\Http\Controllers\API\APIAuthController@register');
     $api->post('user/login', 'App\Http\Controllers\API\APIAuthController@login');
+    $api->post('user/uploadAvatar', 'App\Http\Controllers\API\APIAuthController@uploadAvatar');
+
 
     $api->resource('tag', 'App\Http\Controllers\API\APITagController', ['except' => ['show', 'update']]);
 
