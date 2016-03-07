@@ -81,7 +81,7 @@ class APIAuthController extends BaseController
      */
     public function uploadAvatar(Request $request)
     {
-        $request = uploadPicture('blog_avatar_'.$this->user()->username, $request->file('avatar'));
+        $request = uploadPictureContent('blog_avatar_'.$this->user()->username, $request->file('avatar'));
         if($request)
             return $this->wrapArray("success");
         else

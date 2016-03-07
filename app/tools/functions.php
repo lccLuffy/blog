@@ -68,7 +68,15 @@ function uploadPicture($pictureName, $file, $getUrl = true)
     }
     return false;
 }
+function uploadPictureContent($pictureName, $fileContent, $getUrl = true)
+{
+    $disk = Storage::disk('qiniu');
 
+    if ($disk->put($pictureName, $fileContent)) {
+        return $getUrl ? $disk->getDriver()->downloadUrl($pictureName) : true;
+    }
+    return false;
+}
 /**
  * {#202 ▼
  * +"code": 0
