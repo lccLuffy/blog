@@ -104,6 +104,6 @@ class APIAuthController extends BaseController
     public function postsCount($user_id)
     {
         $count = Post::where('user_id',$user_id)->count();
-        return $this->wrapArray("$count");
+        return $this->wrapArray($count);
     }
 }
