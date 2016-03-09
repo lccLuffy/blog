@@ -96,9 +96,7 @@ class APIAuthController extends BaseController
 
     public function show($user_id)
     {
-        return $this->wrapArray([
-            'user' => User::where('id', $user_id)->first(),
-        ]);
+        return $this->wrapArray(User::where('id', $user_id)->first());
     }
 
     public function postsCount($user_id)
