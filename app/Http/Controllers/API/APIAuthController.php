@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Requests;
+use App\Post;
 use App\User;
 use Dingo\Api\Exception\StoreResourceFailedException;
 use Illuminate\Http\Request;
@@ -70,6 +71,11 @@ class APIAuthController extends BaseController
         ]);
     }
 
+    public function userInfo($user_id)
+    {
+        return User::where('id',$user_id)->get();
+    }
+
     public function checkToken()
     {
         return $this->wrapArray($this->user()->username.' are login');
@@ -86,5 +92,18 @@ class APIAuthController extends BaseController
             return $this->wrapArray("success");
         else
             return $this->wrapArray("fail",true);
+    }
+
+    public function show($user_id)
+    {
+        return $this->wrapArray([
+            'user' => User::where('id', $user_id)->get(),
+        ]);
+    }
+
+    public function postsCount($user_id)
+    {
+        $count = Post::where('user_id',$user_id)->count();
+        return $this->wrapArray($count);
     }
 }

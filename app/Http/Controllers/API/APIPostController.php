@@ -98,5 +98,4 @@ class APIPostController extends BaseController
         return ['error' => false, 'currentPage' => $page, 'perPage' => $perPage, 'results' => $result];
     }
 
-
 }

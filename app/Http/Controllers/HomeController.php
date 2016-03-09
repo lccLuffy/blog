@@ -23,4 +23,8 @@ class HomeController extends Controller
     {
         return view('index');
     }
+    public function api()
+    {
+        return view('api.index');
+    }
 }

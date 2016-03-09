@@ -16,7 +16,9 @@ $api = app('Dingo\Api\Routing\Router');
 
 $api->version('v1', ['middleware' => 'api.throttle'], function ($api) {
 
+    $api->resource('user', 'App\Http\Controllers\API\APIAuthController', ['except' => ['destroy']]);
     $api->get('user/checkToken', 'App\Http\Controllers\API\APIAuthController@checkToken');
+    $api->get('user/{user_id}/postsCount', 'App\Http\Controllers\API\APIAuthController@postsCount');
 
     $api->post('user/register', 'App\Http\Controllers\API\APIAuthController@register');
     $api->post('user/login', 'App\Http\Controllers\API\APIAuthController@login');
@@ -24,7 +26,6 @@ $api->version('v1', ['middleware' => 'api.throttle'], function ($api) {
 
 
     $api->resource('tag', 'App\Http\Controllers\API\APITagController', ['except' => ['show', 'update']]);
-
 
     $api->get('{user_id}/posts', 'App\Http\Controllers\API\APIPostController@postsByUser');
     $api->resource('post', 'App\Http\Controllers\API\APIPostController');
@@ -48,7 +49,7 @@ Route::group(['middleware' => ['web']], function () {
      * 网站
      */
     Route::get('/', 'HomeController@index');
-    Route::get('api', 'API\APITagController@index');
+    Route::get('api', 'HomeController@api');
 
     Route::get('/welcome', 'HomeController@welcome');
 
