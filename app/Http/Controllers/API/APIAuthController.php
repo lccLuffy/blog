@@ -97,7 +97,7 @@ class APIAuthController extends BaseController
     public function show($user_id)
     {
         return $this->wrapArray([
-            'user' => User::where('id', $user_id)->get(),
+            'user' => User::where('id', $user_id)->first(),
         ]);
     }
 
