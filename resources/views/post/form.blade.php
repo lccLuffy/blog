@@ -6,7 +6,6 @@
     </div>
 </div>
 
-
 <div class="form-group">
     <div class="input-group col-md-12">
         <div class="editor">

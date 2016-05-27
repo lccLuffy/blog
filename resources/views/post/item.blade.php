@@ -1,15 +1,16 @@
-<li class="list-group-item list-group-item-heading">
+<li class="list-group-item list-group-item-heading thumbnail">
     <article>
-        <div class="page-header">
-            <a href="{{ route('post.show',$post->id) }}">
-                <p class="lead">{{ $post->title }}</p>
+        <div class="caption">
+            <a href="{{ route('post.show',$post->id) }}" title="{{ $post->title }}">
+                <h2>{{ $post->title }}</h2>
             </a>
-            <small>
-                <i class="fa fa-user"></i><a
-                        href="{{ route('user.index',$post->user_id) }}"><b>{{ ' '.$post->user->username }}</b></a>
-                <i class="fa fa-calendar"></i>{{ ' '.$post->created_at->diffForHumans() }}
-            </small>
         </div>
+
+        <small>
+            <i class="fa fa-user"></i><a
+                    href="{{ route('user.index',$post->user_id) }}"><b>{{ ' '.$post->user->username }}</b></a>
+            <i class="fa fa-calendar"></i>{{ ' '.$post->created_at->diffForHumans() }}
+        </small>
 
         <p>
             {{ fetchDescription($post->content_html,128) }}

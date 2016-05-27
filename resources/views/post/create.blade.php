@@ -99,14 +99,14 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.2-rc.1/js/select2.min.js"></script>
     <script>
         $.getJSON("{{url('api/tag')}}", function (json) {
-            var tags =[]
-            $.each(json.tags,function(idx,item){
+            var tags = []
+            $.each(json.results, function (idx, item) {
                 tags[idx] = item.name;
             })
             $('#tag_select').select2({
                 tags: true,
                 maximumSelectionLength: 5,
-                data:tags
+                data: tags
             });
 
         });
